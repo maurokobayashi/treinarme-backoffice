@@ -8,22 +8,7 @@ default: &default
 development: &development
   <<: *default
   pool: 5
-  # url: postgres://treinarme:fA7XDjjq88V99e4KXyoQRT97N4a6ad@treinarme-rds.cmvunrtfqlm8.us-east-1.rds.amazonaws.com:5432/treinarme_mvp_staging?sslca=config/rds-ssl-ca-cert.pem&sslmode=require&encrypt=true
   url: postgres://treinarme:fA7XDjjq88V99e4KXyoQRT97N4a6ad@treinarme-rds.cmvunrtfqlm8.us-east-1.rds.amazonaws.com:5432/treinarme_mvp_production?sslca=config/rds-ssl-ca-cert.pem&sslmode=require&encrypt=true
-
-test:
-  <<: *default
-  database: treinarme_mvp_test
-  username: treinarme
-  password: <%= ENV['TREINARME_MVP_DATABASE_PASSWORD'] %>
-  host: localhost
-
-# available to test the app with STAGING settings on the development maching
-# ignored by heroku, that hosts the true staging environment
-staging:
-  <<: *default
-  pool: 5
-  url: postgres://treinarme:fA7XDjjq88V99e4KXyoQRT97N4a6ad@treinarme-rds.cmvunrtfqlm8.us-east-1.rds.amazonaws.com:5432/treinarme_mvp_staging?sslca=config/rds-ssl-ca-cert.pem&sslmode=require&encrypt=true
 
 production:
   <<: *default
