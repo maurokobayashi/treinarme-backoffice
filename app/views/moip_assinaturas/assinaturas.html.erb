@@ -1,0 +1,28 @@
+<h1>Listing Assinaturas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>assinante</th>
+      <th>status</th>
+      <th>criado em</th>
+      <th>código</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assinaturas.each do |assinatura| %>
+      <tr>
+        <td><%= assinatura[:customer][:fullname] %></td>
+        <td><%= assinatura[:status] %></td>
+        <td><%= date_from_moip_assinaturas assinatura[:creation_date] %></td>
+        <td><%= assinatura[:code] %></td>
+        <td><%= link_to "Detalhes", assinatura_path(assinatura[:code]) %></td>
+        <td><%= link_to "Faturas", faturas_path(assinatura[:code]) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

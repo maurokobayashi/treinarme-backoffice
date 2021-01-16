@@ -1,0 +1,51 @@
+<% assinou_denovo = @assinatura.created_at > @cancelamento.created_at %>
+<% assinatura_expirada = @expiracao <= Date.today %>
+
+<h1>Solicitação de Cancelamento</h1>
+
+<h3>
+  <% color = assinatura_expirada ? "red" : "green" %>
+  <span style="color: <%= color %>;">Data de expiração <%= date_to_str(@expiracao, "%d/%m/%Y") %></span>
+  <% if !assinatura_expirada %>
+  <br><small>daqui a <%= (@expiracao - Date.today).to_i %> dias</small>
+  <% end %>
+</h3>
+<% if @personal.active? && assinatura_expirada && !assinou_denovo %>
+<h3>
+  <%= link_to "Inativar personal", "https://www.treinar.me/malandro/personals/#{@personal.id}/edit", target: "_blank" %>
+</h3>
+<% end %>
+
+<table>
+  <tbody>
+    <tr>
+      <td>solicitado em:</td>
+      <td><%= date_to_str @cancelamento.created_at %></td>
+    </tr>
+    <tr>
+      <td>cliente:</td>
+      <% color = @personal.inactive? ? "red" : "green" %>
+      <td style="color: <%= color %>;">
+        <%= link_to @personal.name, "https://www.treinar.me/malandro/personals/#{@personal.id}", target: "_blank" %>
+        (<%= @personal.status %>)
+        </td>
+    </tr>
+    <tr>
+      <td>assinatura:</td>
+      <% if assinou_denovo %>
+      <td style="color: green;">O cliente reativou a assinatura</td>
+      <% else %>
+      <td>
+        <%= link_to @assinatura.code, "https://conta.wirecard.com.br/subscriptions/#{@assinatura.code}", target: "_blank" %>
+        (criada em <%= date_to_str @assinatura.created_at, "%d/%m/%Y" %>)
+      </td>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+<a href="javascript:window.history.back();">Voltar</a>

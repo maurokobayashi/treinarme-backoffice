@@ -1,0 +1,1 @@
+ChartPedido = Struct.new(:created_at, :amount)

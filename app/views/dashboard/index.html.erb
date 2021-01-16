@@ -1,0 +1,41 @@
+<h2><%= date_to_str Time.now %></h2>
+
+<h1>Saldo na Conta Wirecard</h1>
+
+<table style="min-width: 500px;">
+  <thead style="text-align: left;">
+    <tr>
+      <th>Disponível</th>
+      <th>Futuro</th>
+      <th style="color: lightgrey;">Bloqueado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="width: 33%;">
+        <h3>R$ <%= from_cents @saldo.current.first.amount %></h3>
+      </td>
+      <td style="width: 30%;">
+        <h3>R$ <%= from_cents @saldo.future.first.amount %></h3>
+      </td>
+      <td style="width: 33%; color: lightgrey;">
+        <h3>R$ <%= from_cents @saldo.unavailable.first.amount %></h3>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<%= area_chart faturamento_por_dia_path, title: "Faturamento", width: "600px", curve: false %>
+
+
+<br><br>
+<%= link_to "Faturamento", faturamento_path %>
+<hr>
+<%= link_to "Leads", leads_path %>
+<br><%= link_to "Cancelamentos", cancelamentos_path %>
+<br><%= link_to "Personals", "aaa" %>
+<br><%= link_to "Bairros", bairros_path %>
+<hr>
+<%= link_to "Retentativas", retentativas_path %>
+<br><%= link_to "Pagamentos", pedidos_path %>
+<br><%= link_to "Assinaturas", assinaturas_path %>

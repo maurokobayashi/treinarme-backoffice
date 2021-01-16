@@ -1,0 +1,34 @@
+<h1>Solicitações de Cancelamento</h1>
+
+<h3><%= @totais[:mes] %> cancelamentos este mês</h3>
+
+<%= area_chart cancelamentos_per_month_path, title: "Por mês (12 meses)" %>
+
+<br>
+<br>
+
+<table>
+  <thead style="text-align:left;">
+    <tr>
+      <th>personal</th>
+      <th>status</th>
+      <th>solicitado em</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @cancelamentos.each do |cancelamento| %>
+      <% color = cancelamento.personal.active? ? "green" : "red" %>
+      <tr>
+        <td style="color: <%= color %>"><%= cancelamento.personal.name %></td>
+        <td style="color: <%= color %>"><%= cancelamento.personal.status %></td>
+        <td><%= date_to_str cancelamento.created_at %></td>
+        <td><%= link_to "Detalhes", cancelamento_path(cancelamento.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<a href="javascript:window.history.back();">Voltar</a>

@@ -1,0 +1,32 @@
+<h1>Retentativas</h1>
+
+<table>
+  <thead style="text-align:left;">
+    <tr>
+      <th>data</th>
+      <th>id</th>
+      <th>cliente</th>
+      <th>status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pedidos.each do |pedido| %>
+      <% personal = Personal.find_by_email pedido[:customer][:email] %>
+      <tr>
+        <td><%= date_from_moip_v2 pedido[:created_at] %></td>
+        <% color = personal.present? && personal.active? ? "green" : "red" %>
+        <td><%= personal.id %></td>
+        <td style="color: <%= color %>;"><%= pedido[:customer][:fullname] %></td>
+        <td><%= pedido[:status] %></td>
+        <td style="padding: 0 3px;"><%= link_to "Detalhes", pedido_path(pedido[:id]) %></td>
+        <td style="padding: 0 3px;"><%= link_to "treinar.me", "https://www.treinar.me/malandro/personals?q%5Bid_eq%5D=#{personal.id}", target: "_blank" %></td>
+        <td style="padding: 0 3px;"><%= link_to "wirecard", "https://conta.wirecard.com.br/orders/list?q=#{pedido[:customer][:fullname]}", target: "_blank" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<a href="javascript:window.history.back();">Voltar</a>

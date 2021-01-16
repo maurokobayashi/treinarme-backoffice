@@ -1,0 +1,6 @@
+<div>
+  <%= bar_chart bairros_mais_buscados_path(dias: params[:dias], limit: params[:limit]), title: "Bairros mais buscados (#{params[:dias] || 180} dias)", width: "500px", height: "800px" %>
+</div>
+<div>
+  <%= bar_chart bairros_mais_concorridos_path(limit: params[:limit]), title: "Bairros mais concorridos", width: "500px", height: "600px" %>
+</div>

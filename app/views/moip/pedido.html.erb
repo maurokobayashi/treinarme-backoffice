@@ -1,0 +1,41 @@
+<h1>Pedido <%= @pedido[:id] %></h1>
+
+<h5>
+  Criado em <%= date_from_moip_v2 @pedido[:created_at] %>
+  <br>
+  <%= @pedido[:status] %>
+</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>comprador</td>
+      <td><%= @pedido[:customer][:fullname] %> (<%= @pedido[:customer][:email] %>)</td>
+    </tr>
+    <tr>
+      <td>pagamento</td>
+      <td><%= link_to @pagamento[:id], "https://conta.wirecard.com.br/orders/#{@pedido[:id]}", target: "_blank" %></td>
+    </tr>
+    <tr>
+      <td>status</td>
+      <td><%= @pagamento[:status] %></td>
+    </tr>
+    <tr>
+      <td>cartão de crédito</td>
+      <td><%= @pagamento[:funding_instrument][:credit_card][:brand] %> - <%= @pagamento[:funding_instrument][:credit_card][:first6] %>******<%= @pagamento[:funding_instrument][:credit_card][:last4] %></td>
+    </tr>
+    <% if @pedido[:status] == "NOT_PAID" %>
+    <tr>
+      <td>motivo</td>
+      <td><%= @pagamento[:cancellation_details][:code] %> - <%= classificar_cancelamento @pagamento[:cancellation_details][:code] %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<a href="javascript:window.history.back();">Voltar</a>
