@@ -23,6 +23,13 @@ class DashboardController < ApplicationController
     @acumulado_mes_passado = acumulado_mes_passado[:summary]
   end
 
+  def operacao
+  end
+
+  def relatorios
+
+  end
+
   # GET @ /bairros
   def bairros
   end

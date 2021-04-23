@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root 'dashboard#index'
 
   get 'faturamento', to: 'dashboard#faturamento'
+  get 'operacao', to: 'dashboard#operacao'
+  get 'relatorios', to: 'dashboard#relatorios'
   get 'bairros', to: 'dashboard#bairros'
 
   get '/assinaturas', to: 'moip_assinaturas#assinaturas'

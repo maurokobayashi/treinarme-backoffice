@@ -1,41 +1,125 @@
-<h2><%= date_to_str Time.now %></h2>
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
 
-<h1>Saldo na Conta Wirecard</h1>
+  <div class="header-large-title mt-3">
+    <div class="text-muted"><%= date_to_str(Time.now, "%d/%m/%Y") %></div>
+    <h1 class="title">Resumo</h1>
+    <h4 class="subtitle">Resolveu trabalhar é? Então bora!</h4>
+  </div>
 
-<table style="min-width: 500px;">
-  <thead style="text-align: left;">
-    <tr>
-      <th>Disponível</th>
-      <th>Futuro</th>
-      <th style="color: lightgrey;">Bloqueado</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="width: 33%;">
-        <h3>R$ <%= from_cents @saldo.current.first.amount %></h3>
-      </td>
-      <td style="width: 30%;">
-        <h3>R$ <%= from_cents @saldo.future.first.amount %></h3>
-      </td>
-      <td style="width: 33%; color: lightgrey;">
-        <h3>R$ <%= from_cents @saldo.unavailable.first.amount %></h3>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div class="section mt-3">
+    <div class="row">
+      <div class="col-6">
+        <a href="contatos.html">
+          <div class="card product-card">
+            <div class="card-body">
+              <p class="text-secondary mb-0">Saldo disponível</p>
+              <h2 class="title mt-2">
+                <span class="text-muted">R$</span>
+                <%= from_cents @saldo.current.first.amount %>
+              </h2>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="contatos.html">
+          <div class="card product-card">
+            <div class="card-body">
+              <p class="text-secondary mb-0">Saldo futuro</p>
+              <h2 class="title mt-2">
+                <span class="text-muted">R$</span>
+                <%= from_cents @saldo.future.first.amount %>
+              </h2>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
 
-<%= area_chart faturamento_por_dia_path, title: "Faturamento", width: "600px", curve: false %>
+  <!-- Avisos -->
+  <div class="section mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Faturamento</h5>
+        <%= area_chart faturamento_por_dia_path, width: "100%", curve: false %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ultimos contatos -->
+  <div class="section full mt-4">
+    <div class="section-title">Últimos Churns</div>
+  </div>
+  <div class="section">
+    <div class="card">
+      <ul class="listview flush transparent image-listview text">
+        <li>
+          <a href="contato.html" class="item">
+            <div class="in">
+              Leandro Gomes
+              <span class="text-muted">há 2h</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="contato.html" class="item">
+            <div class="in">
+              Nathalia Eduarda
+              <span class="text-muted">há 2 dias</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="contato.html" class="item">
+            <div class="in">
+              Silvana Basilio Neves
+              <span class="text-muted">há 5 dias</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="contato.html" class="item">
+            <div class="in">
+              Elcio Marques
+              <span class="text-muted">há 1 semana</span>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+<!-- * App Capsule -->
 
 
-<br><br>
-<%= link_to "Faturamento", faturamento_path %>
-<hr>
-<%= link_to "Leads", leads_path %>
-<br><%= link_to "Cancelamentos", cancelamentos_path %>
-<br><%= link_to "Personals", "aaa" %>
-<br><%= link_to "Bairros", bairros_path %>
-<hr>
-<%= link_to "Retentativas", retentativas_path %>
-<br><%= link_to "Pagamentos", pedidos_path %>
-<br><%= link_to "Assinaturas", assinaturas_path %>
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item">
+    <div class="col">
+      <ion-icon name="game-controller-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

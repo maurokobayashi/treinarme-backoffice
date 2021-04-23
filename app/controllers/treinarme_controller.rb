@@ -20,8 +20,8 @@ class TreinarmeController < ApplicationController
 
   # GET @ /cancelamentos
   def cancelamentos
-    @totais = {mes: SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', Date.today.at_beginning_of_month).count}
-    @cancelamentos = SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', 40.days.ago).reverse
+    @totais = {mes: SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', Date.today.at_beginning_of_month).distinct.count(:personal_id)}
+    @cancelamentos = SubscriptionEvent.cancelation.last(15).reverse
   end
 
   # GET @ /cancelamentos/:id

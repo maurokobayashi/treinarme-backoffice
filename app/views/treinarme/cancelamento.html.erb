@@ -1,51 +1,91 @@
 <% assinou_denovo = @assinatura.created_at > @cancelamento.created_at %>
 <% assinatura_expirada = @expiracao <= Date.today %>
 
-<h1>Solicitação de Cancelamento</h1>
-
-<h3>
-  <% color = assinatura_expirada ? "red" : "green" %>
-  <span style="color: <%= color %>;">Data de expiração <%= date_to_str(@expiracao, "%d/%m/%Y") %></span>
-  <% if !assinatura_expirada %>
-  <br><small>daqui a <%= (@expiracao - Date.today).to_i %> dias</small>
-  <% end %>
-</h3>
-<% if @personal.active? && assinatura_expirada && !assinou_denovo %>
-<h3>
-  <%= link_to "Inativar personal", "https://www.treinar.me/malandro/personals/#{@personal.id}/edit", target: "_blank" %>
-</h3>
-<% end %>
-
-<table>
-  <tbody>
-    <tr>
-      <td>solicitado em:</td>
-      <td><%= date_to_str @cancelamento.created_at %></td>
-    </tr>
-    <tr>
-      <td>cliente:</td>
-      <% color = @personal.inactive? ? "red" : "green" %>
-      <td style="color: <%= color %>;">
-        <%= link_to @personal.name, "https://www.treinar.me/malandro/personals/#{@personal.id}", target: "_blank" %>
-        (<%= @personal.status %>)
-        </td>
-    </tr>
-    <tr>
-      <td>assinatura:</td>
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+  <div class="section full mt-2">
+    <div class="section-title">Solicitação de cancelamento</div>
+    <ul class="listview link-listview">
+      <li>
+        <a href="https://www.treinar.me/malandro/personals/<%= @personal.id %>" target="_blank">
+          <span class="text-secondary">Cliente</span>
+          <span class="text-dark">
+            <%= @personal.name %>
+            <% color = @personal.active? ? "success" : "danger" %>
+            <span class="text-<%= color %> font-25 wieght-700 me-05">&bullet;</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="text-secondary">Solicitado em</span>
+          <span class="text-dark"><%= date_to_str @cancelamento.created_at %></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://conta.wirecard.com.br/subscriptions/<%= @assinatura.code %>" target="_blank">
+          <span class="text-secondary">Assinatura</span>
+          <span class="text-dark"><%= @assinatura.code %></span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="text-secondary">Expira em</span>
+          <% color = assinatura_expirada ? "danger" : "success" %>
+          <span class="text-<%= color %>">
+            <%= date_to_str(@expiracao, "%d/%m/%Y") %>
+            <% if !assinatura_expirada %>
+            (<%= (@expiracao - Date.today).to_i %> dias)
+            <% end %>
+          </span>
+        </a>
+      </li>
       <% if assinou_denovo %>
-      <td style="color: green;">O cliente reativou a assinatura</td>
-      <% else %>
-      <td>
-        <%= link_to @assinatura.code, "https://conta.wirecard.com.br/subscriptions/#{@assinatura.code}", target: "_blank" %>
-        (criada em <%= date_to_str @assinatura.created_at, "%d/%m/%Y" %>)
-      </td>
-    </tr>
-    <% end %>
-    <tr>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+      <li>
+        <a>
+          <span class="text-secondary">Observação</span>
+          <span class="text-dark">Cliente reativou assinatura</span>
+        </a>
+      </li>
+      <% elsif assinatura_expirada && @personal.active? %>
+      <li>
+        <a href="https://www.treinar.me/malandro/personals/<%= @personal.id %>/edit" target="_blank">
+          <span class="text-secondary">Ações</span>
+          <span class="text-danger">Inativar cliente</span>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- * App Capsule -->
 
-<br>
-<a href="javascript:window.history.back();">Voltar</a>
+
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="game-controller-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

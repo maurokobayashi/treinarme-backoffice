@@ -2,7 +2,7 @@
 
 <h3>Hoje: <%= @totais[:hoje_unicos] %> leads únicos (<%= @totais[:hoje] %> total)</h3>
 
-<%= area_chart leads_per_day_path, title: "Por dia (15 dias)" %>
+<%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
 
 <%= area_chart leads_per_week_path, title: "Por semana (90 dias)" %>
 

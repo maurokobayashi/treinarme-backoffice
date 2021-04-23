@@ -1,31 +1,26 @@
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
-
-  <div class="section mt-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Cancelamentos</h5>
-        <%= column_chart cancelamentos_per_month_path %>
-      </div>
-    </div>
-  </div>
-
-  <div class="section full mt-4">
-    <div class="section-title">Últimos 15 cancelamentos</div>
-  </div>
+  <div class="listview-title mt-2">Operação</div>
   <ul class="listview link-listview">
-    <% @cancelamentos.each do |cancelamento| %>
-      <% color = cancelamento.personal.active? ? "success" : "danger" %>
-      <li>
-        <a href="<%= cancelamento_path(cancelamento.id) %>">
-          <span class="text-secondary">
-            <%= cancelamento.personal.name %>
-            <span class="text-<%= color %> font-25 wieght-700 me-05">&bullet;</span>
-          </span>
-          <span class="text-muted"><%= date_to_str(cancelamento.created_at, "%d/%m/%Y") %></span>
-        </a>
-      </li>
-    <% end %>
+    <li>
+      <a href="<%= cancelamentos_path %>">Cancelamentos</a>
+    </li>
+    <li>
+      <a href="<%= pedidos_path %>">Pagamentos</a>
+    </li>
+    <li>
+      <a href="<%= leads_path %>">Leads</a>
+    </li>
+    <li>
+      <a href="<%= assinaturas_path %>">Assinaturas</a>
+    </li>
+    <li class="divider-title">Financeiro</li>
+    <li>
+      <a href="https://conta.wirecard.com.br/transfers/bank_account/new" target="_blank">Sacar dinheiro</a>
+    </li>
+    <li>
+      <a href="https://conta.wirecard.com.br/transfers" target="_blank">Transferências realizadas</a>
+    </li>
   </ul>
 
 </div>

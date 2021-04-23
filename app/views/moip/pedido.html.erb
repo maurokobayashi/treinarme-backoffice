@@ -1,41 +1,80 @@
-<h1>Pedido <%= @pedido[:id] %></h1>
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+  <div class="section full mt-2">
+    <div class="section-title">Detalhes do pagamento</div>
+    <ul class="listview link-listview">
+      <li>
+        <a>
+          <span class="text-secondary">Pagador</span>
+          <span class="text-dark"><%= @pedido[:customer][:fullname] %></span>
+        </a>
+      </li>
+      <li>
+        <a href="https://conta.wirecard.com.br/orders/<%= @pedido[:id] %>" targer="_blank">
+          <span class="text-secondary">Pagamento</span>
+          <span class="text-primary"><%= @pagamento[:id] %></span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="text-secondary">Criado em</span>
+          <span class="text-dark"><%= date_from_moip_v2 @pedido[:created_at] %></span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="text-secondary">Status</span>
+          <% color = @pedido[:status] == "NOT_PAID" ? "danger" : "success" %>
+          <span class="text-<%= color %>"><%= @pagamento[:status] %></span>
+        </a>
+      </li>
+      <li>
+        <a>
+          <span class="text-secondary">Cartão de crédito</span>
+          <span class="text-dark">
+            <%= @pagamento[:funding_instrument][:credit_card][:first6] %>******<%= @pagamento[:funding_instrument][:credit_card][:last4] %>
+          </span>
+        </a>
+      </li>
+      <% if @pedido[:status] == "NOT_PAID" && @pagamento[:cancellation_details].present? %>
+      <li>
+        <a>
+          <span class="text-secondary">Motivo</span>
+          <span class="text-dark"><%= @pagamento[:cancellation_details][:code] %> - <%= classificar_cancelamento @pagamento[:cancellation_details][:code] %></span>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- * App Capsule -->
 
-<h5>
-  Criado em <%= date_from_moip_v2 @pedido[:created_at] %>
-  <br>
-  <%= @pedido[:status] %>
-</h5>
 
-<table>
-  <tbody>
-    <tr>
-      <td>comprador</td>
-      <td><%= @pedido[:customer][:fullname] %> (<%= @pedido[:customer][:email] %>)</td>
-    </tr>
-    <tr>
-      <td>pagamento</td>
-      <td><%= link_to @pagamento[:id], "https://conta.wirecard.com.br/orders/#{@pedido[:id]}", target: "_blank" %></td>
-    </tr>
-    <tr>
-      <td>status</td>
-      <td><%= @pagamento[:status] %></td>
-    </tr>
-    <tr>
-      <td>cartão de crédito</td>
-      <td><%= @pagamento[:funding_instrument][:credit_card][:brand] %> - <%= @pagamento[:funding_instrument][:credit_card][:first6] %>******<%= @pagamento[:funding_instrument][:credit_card][:last4] %></td>
-    </tr>
-    <% if @pedido[:status] == "NOT_PAID" %>
-    <tr>
-      <td>motivo</td>
-      <td><%= @pagamento[:cancellation_details][:code] %> - <%= classificar_cancelamento @pagamento[:cancellation_details][:code] %></td>
-    </tr>
-    <% end %>
-    <tr>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-
-<br>
-
-<a href="javascript:window.history.back();">Voltar</a>
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="game-controller-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

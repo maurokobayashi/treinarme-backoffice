@@ -94,7 +94,7 @@ class ChartsController < ApplicationController
   end
 
   def cancelamentos_per_month
-    render json: SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', 12.months.ago).group_by_month(:created_at, format: "%b-%Y").distinct.count(:personal_id)
+    render json: SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', 6.months.ago).group_by_month(:created_at, format: "%b-%Y").distinct.count(:personal_id)
   end
 
   def faturamento_por_dia
