@@ -1841,7 +1841,7 @@ a.badge-dark {
   color: #F55000;
   transition: 0.2s all; }
   .btn-outline-primary:hover, .btn-outline-primary:active {
-    background: rgb(245, 80, 0, 0.05) !important;
+    background: rgba(245, 80, 0, 0.05) !important;
     border-color: #F55000 !important;
     color: #F55000 !important; }
   .btn-outline-primary.active {
