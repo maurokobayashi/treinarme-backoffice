@@ -1625,7 +1625,7 @@ a.badge-dark {
   .card.bg-light {
     background: #fff; }
   .card.bg-active {
-    background: rgb(245, 80, 0, 0.05); }
+    background: rgba(245, 80, 0, 0.05); }
 
 .card.product-card .card-body {
   padding: 8px; }
