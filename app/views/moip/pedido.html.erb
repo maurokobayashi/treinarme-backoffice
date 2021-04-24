@@ -1,4 +1,5 @@
 <% @header_title = "Pagamento" %>
+<% personal = Personal.find_by_email @pedido[:customer][:email] %>
 
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
@@ -6,7 +7,7 @@
     <div class="listview-title">Criado em <%= date_from_moip_v2 @pedido[:created_at] %></div>
     <ul class="listview link-listview">
       <li>
-        <a>
+        <a href="https://www.treinar.me/malandro/personals/<%= personal.try(:id) %>" target="_blank">
           <span class="text-secondary">Pagador</span>
           <span class="text-dark"><%= @pedido[:customer][:fullname] %></span>
         </a>
@@ -41,6 +42,14 @@
       </li>
       <% end %>
     </ul>
+
+    <% if (personal && personal.active? && @pedido[:status] == "NOT_PAID") %>
+    <div class="section mt-2">
+      <a href="https://www.treinar.me/malandro/personals/<%= personal.id %>/edit" target="_blank">
+        <button type="button" class="btn btn-primary btn-block">Inativar Personal</button>
+      </a>
+    </div>
+    <% end %>
   </div>
 </div>
 <!-- * App Capsule -->

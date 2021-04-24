@@ -53,9 +53,8 @@
   <ul class="listview link-listview">
     <% @pedidos.each do |pedido| %>
       <% personal = Personal.find_by_email pedido[:customer][:email] %>
-      <% color_pagador = personal && personal.active? ? "success" : "dark" %>
+      <% color_pagador = (personal && personal.active? && pedido[:status] == "NOT_PAID") ? "danger" : "dark" %>
       <% color_pedido = pedido[:status] == "NOT_PAID" ? "danger" : "success" %>
-      <% inativar = personal && personal.active? && pedido[:status] == "NOT_PAID" %>
       <li>
         <a href="<%= pedido_path(pedido[:id]) %>">
           <span class="text-<%= color_pagador %>">
