@@ -1,11 +1,13 @@
+<% @header_title = "Cancelamentos" %>
+
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
 
   <div class="section mt-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Cancelamentos</h5>
-        <%= column_chart cancelamentos_per_month_path %>
+        <!-- <h5 class="card-title">Por mês</h5> -->
+        <%= column_chart cancelamentos_per_month_path, title: "Últimos 6 meses", width: "100%", height: "200px" %>
       </div>
     </div>
   </div>
@@ -48,7 +50,7 @@
   </a>
   <a href="<%= operacao_path %>" class="item active">
     <div class="col">
-      <ion-icon name="game-controller-outline"></ion-icon>
+      <ion-icon name="hammer-outline"></ion-icon>
       <strong>Operação</strong>
     </div>
   </a>

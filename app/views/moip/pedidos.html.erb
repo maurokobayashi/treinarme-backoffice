@@ -1,3 +1,4 @@
+<% @header_title = "Pagamentos" %>
 
 <!-- Extra Header -->
 <div class="extraHeader not-fixed">
@@ -46,22 +47,22 @@
 
   <div class="section full mt-2">
     <div class="section-title">
-      <%= @totais[:count] %> pagamentos totalizando R$ <%= from_cents @totais[:amount] %>
+      <%= @totais[:count] %> pagamentos | R$ <%= from_cents @totais[:amount] %>
     </div>
   </div>
   <ul class="listview link-listview">
     <% @pedidos.each do |pedido| %>
       <% personal = Personal.find_by_email pedido[:customer][:email] %>
-      <% color_pagador = personal && personal.active? ? "success" : "danger" %>
+      <% color_pagador = personal && personal.active? ? "success" : "dark" %>
       <% color_pedido = pedido[:status] == "NOT_PAID" ? "danger" : "success" %>
-      <% color_inativar = personal && personal.active? && pedido[:status] == "NOT_PAID" ? "danger" : "secondary" %>
+      <% inativar = personal && personal.active? && pedido[:status] == "NOT_PAID" %>
       <li>
         <a href="<%= pedido_path(pedido[:id]) %>">
-          <span class="text-<%= color_inativar %>">
+          <span class="text-<%= color_pagador %>">
             <%= pedido[:customer][:fullname].titleize %>
-            <span class="text-<%= color_pagador %> font-20 wieght-700 me-05">&bullet;</span>
+            <span class="text-<%= color_pedido %> font-20 wieght-700 me-05">&bullet;</span>
           </span>
-          <span class="font-11 text-<%= color_pedido %>"><%= pedido[:status] %></span>
+          <span class="text-muted"><%= (date_from_moip_v2 pedido[:created_at]).split(" ").first %></span>
         </a>
       </li>
     <% end %>
@@ -87,7 +88,7 @@
   </a>
   <a href="<%= operacao_path %>" class="item active">
     <div class="col">
-      <ion-icon name="game-controller-outline"></ion-icon>
+      <ion-icon name="hammer-outline"></ion-icon>
       <strong>Operação</strong>
     </div>
   </a>

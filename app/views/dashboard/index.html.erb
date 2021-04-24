@@ -1,10 +1,12 @@
+<% @header_hide_voltar = true %>
+
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
 
   <div class="header-large-title mt-3">
     <div class="text-muted"><%= date_to_str(Time.now, "%d/%m/%Y") %></div>
-    <h1 class="title">Resumo</h1>
-    <h4 class="subtitle">Resolveu trabalhar é? Então bora!</h4>
+    <h1 class="title">Saldo em conta</h1>
+    <!-- <h4 class="subtitle">Resolveu trabalhar é? Então bora!</h4> -->
   </div>
 
   <div class="section mt-3">
@@ -111,7 +113,7 @@
   </a>
   <a href="<%= operacao_path %>" class="item">
     <div class="col">
-      <ion-icon name="game-controller-outline"></ion-icon>
+      <ion-icon name="hammer-outline"></ion-icon>
       <strong>Operação</strong>
     </div>
   </a>

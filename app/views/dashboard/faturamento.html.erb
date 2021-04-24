@@ -15,14 +15,14 @@
         <h3>
           <small>Hoje</small>
           <br>R$ <%= from_cents @dia_hoje[:amount] %>
-          <br><small>(<%= @dia_hoje[:count] %> pedidos)</small>
+          <br><small>(<%= @dia_hoje[:count] %> pagamentos)</small>
         </h3>
       </td>
       <td style="width: 33%; color: darkgrey;">
         <h3>
           <small><%= Time.now.last_month.strftime("%d/%b") %></small>
           <br>R$ <%= from_cents @dia_mes_passado[:amount] %>
-          <br><small>(<%= @dia_mes_passado[:count] %> pedidos)</small>
+          <br><small>(<%= @dia_mes_passado[:count] %> pagamentos)</small>
         </h3>
       </td>
       <td>
@@ -43,14 +43,14 @@
         <h3>
           <small>Acumulado</small>
           <br>R$ <%= from_cents @acumulado_mes_corrente[:amount] %>
-          <br><small>(<%= @acumulado_mes_corrente[:count] %> pedidos)</small>
+          <br><small>(<%= @acumulado_mes_corrente[:count] %> pagamentos)</small>
         </h3>
       </td>
       <td style="width: 33%; color: darkgrey;">
         <h3>
           <small>Acumulado</small>
           <br>R$ <%= from_cents @acumulado_mes_passado[:amount] %>
-          <br><small>(<%= @acumulado_mes_passado[:count] %> pedidos)</small>
+          <br><small>(<%= @acumulado_mes_passado[:count] %> pagamentos)</small>
         </h3>
       </td>
       <td>

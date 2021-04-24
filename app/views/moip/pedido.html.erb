@@ -1,7 +1,9 @@
+<% @header_title = "Pagamento" %>
+
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
   <div class="section full mt-2">
-    <div class="section-title">Detalhes do pagamento</div>
+    <div class="listview-title">Criado em <%= date_from_moip_v2 @pedido[:created_at] %></div>
     <ul class="listview link-listview">
       <li>
         <a>
@@ -13,12 +15,6 @@
         <a href="https://conta.wirecard.com.br/orders/<%= @pedido[:id] %>" targer="_blank">
           <span class="text-secondary">Pagamento</span>
           <span class="text-primary"><%= @pagamento[:id] %></span>
-        </a>
-      </li>
-      <li>
-        <a>
-          <span class="text-secondary">Criado em</span>
-          <span class="text-dark"><%= date_from_moip_v2 @pedido[:created_at] %></span>
         </a>
       </li>
       <li>
@@ -66,7 +62,7 @@
   </a>
   <a href="<%= operacao_path %>" class="item active">
     <div class="col">
-      <ion-icon name="game-controller-outline"></ion-icon>
+      <ion-icon name="hammer-outline"></ion-icon>
       <strong>Operação</strong>
     </div>
   </a>

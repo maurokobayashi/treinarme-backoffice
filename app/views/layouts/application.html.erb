@@ -21,18 +21,61 @@
     <!-- App Header -->
     <div class="appHeader not-fixed bg-primary text-light">
       <div class="left">
+        <% unless @header_hide_voltar %>
         <a href="#" class="headerButton goBack">
           <ion-icon name="chevron-back-outline"></ion-icon>
         </a>
+        <% end %>
+        <div class="pageTitle">
+        <span class="font-18 weight-600"><%= @header_title || "Backoffice" %></span>
+      </div>
       </div>
       <div class="pageTitle">
-        <span class="font-18 weight-600">Backoffice</span>
       </div>
       <div class="right">
+        <% unless @header_hide_opcoes %>
+        <a href="#" class="headerButton" data-bs-toggle="modal" data-bs-target="#action-sheet-opcoes">
+          <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+        </a>
+        <% end %>
       </div>
     </div>
 
     <%= yield %>
+
+    <% unless @header_hide_opcoes %>
+    <!-- Action sheet opções -->
+    <div class="modal fade action-sheet" id="action-sheet-opcoes" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Opções</h5>
+          </div>
+          <div class="modal-body">
+            <ul class="action-button-list">
+              <li>
+                <a href="/sair" class="btn btn-list text-danger">
+                  <span>
+                    <ion-icon name="log-out-outline"></ion-icon>
+                    Sair
+                  </span>
+                </a>
+              </li>
+              <li class="action-divider"></li>
+              <li>
+                <a href="#" class="btn btn-list" data-bs-dismiss="modal">
+                  <span>
+                    <ion-icon name="close-outline"></ion-icon>
+                    Fechar
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
 
     <!-- Ionicons -->
     <script type="module" src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>

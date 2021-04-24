@@ -2,8 +2,12 @@ class DashboardController < ApplicationController
 
   # ROOT
   def index
-    api = moip_v2_api
-    @saldo = api.balances.show
+    if params[:secret] && params[:secret] == "rtg32oue"
+      api = moip_v2_api
+      @saldo = api.balances.show
+    else
+      redirect_to "https://www.treinar.me"
+    end
   end
 
   # GET @ /faturamento
