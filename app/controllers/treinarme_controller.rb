@@ -1,11 +1,11 @@
 class TreinarmeController < ApplicationController
 
-  # GET @ /leads?q=?&status=?
+  # GET @ /leads?q=?&status=?&limit=?
   def leads
-    leads_hoje = Lead.where('DATE(created_at) = ?', Date.today).count
-    leads_hoje_unicos = Lead.where('DATE(created_at) = ?', Date.today).distinct.count(:phone)
-    @totais = {hoje: leads_hoje, hoje_unicos: leads_hoje_unicos}
-    @leads = Lead.where(lead_source: true).limit(20).order(id: :desc)
+    @totais = Lead.where('DATE(created_at) = ?', Date.today).distinct.count(:phone)
+    query = Lead.where(lead_source: true)
+    query = query.where("name ILIKE ?", "%#{params[:q]}%") if params[:q].present?
+    @leads = query.limit(params[:limit] || 20).order(id: :desc)
   end
 
   # GET @ /leads/:id

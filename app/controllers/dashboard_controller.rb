@@ -2,8 +2,10 @@ class DashboardController < ApplicationController
 
   # ROOT
   def index
-    api = moip_v2_api
-    @saldo = api.balances.show
+    @saldo = moip_v2_api.balances.show
+    @leads_count = Lead.where('DATE(created_at) = ?', Date.today).count
+    @leads_unicos_count = Lead.where('DATE(created_at) = ?', Date.today).distinct.count(:phone)
+    @cancelamentos_count = SubscriptionEvent.cancelation.where('DATE(created_at) = ?', Date.today).distinct.count(:personal_id)
   end
 
   # GET @ /faturamento

@@ -52,40 +52,32 @@
 
   <!-- Ultimos contatos -->
   <div class="section full mt-4">
-    <div class="section-title">Últimos Churns</div>
+    <div class="section-title">Hoje</div>
   </div>
   <div class="section">
     <div class="card">
       <ul class="listview flush transparent image-listview text">
         <li>
-          <a href="contato.html" class="item">
+          <a href="<%= leads_path %>" class="item">
             <div class="in">
-              Leandro Gomes
-              <span class="text-muted">há 2h</span>
+              Leads únicos
+              <span class="text-primary"><%= @leads_unicos_count %></span>
             </div>
           </a>
         </li>
         <li>
-          <a href="contato.html" class="item">
+          <a href="<%= leads_path %>" class="item">
             <div class="in">
-              Nathalia Eduarda
-              <span class="text-muted">há 2 dias</span>
+              Leads total
+              <span class="text-primary"><%= @leads_count %></span>
             </div>
           </a>
         </li>
         <li>
-          <a href="contato.html" class="item">
+          <a href="<%= cancelamentos_path %>" class="item">
             <div class="in">
-              Silvana Basilio Neves
-              <span class="text-muted">há 5 dias</span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="contato.html" class="item">
-            <div class="in">
-              Elcio Marques
-              <span class="text-muted">há 1 semana</span>
+              Cancelamentos
+              <span class="text-primary"><%= @cancelamentos_count %></span>
             </div>
           </a>
         </li>

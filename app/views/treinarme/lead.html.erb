@@ -1,0 +1,83 @@
+<% @header_title = "Lead" %>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+  <div class="section full mt-2">
+    <div class="listview-title">
+      Criado em <%= date_to_str @lead.created_at %>
+      <span class="badge badge-primary weight-500"><%= @lead.status %></span>
+    </div>
+    <% if @lead.comment.present? %>
+      <%
+        overflow = @lead.comment.size > 60 ? "..." : ""
+        comment = @lead.comment.present? ? "#{@lead.comment.first(60)}#{overflow}" : ""
+      %>
+      <div class="section full">
+        <div class="wide-block pt-2 pb-2 font-14">
+          <%= comment.html_safe %>
+        </div>
+      </div>
+    <% end %>
+
+    <ul class="listview simple-listview mt-2">
+      <li>
+        <span class="text-secondary">Nome</span>
+        <span class="text-dark"><%= @lead.name %></span>
+        </a>
+      </li>
+      <li>
+        <span class="text-secondary">Bairro</span>
+        <span class="text-dark"><%= @lead.location %></span>
+        </a>
+      </li>
+      <li>
+        <span class="text-secondary">Celular</span>
+        <span class="text-dark"><%= @lead.phone %></span>
+      </li>
+      <li>
+        <span class="text-secondary">E-mail</span>
+        <span class="text-dark"><%= @lead.email %></span>
+      </li>
+      <li>
+        <span class="text-secondary">Idade</span>
+        <span class="text-dark"><%= @lead.age %> anos</span>
+      </li>
+      <li>
+        <span class="text-secondary">Horários</span>
+        <span class="text-dark"><%= @lead.requested_time.try(:to_s) %></span>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<!-- * App Capsule -->
+
+
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="hammer-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->
