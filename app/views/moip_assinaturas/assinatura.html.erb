@@ -1,0 +1,72 @@
+<% @header_title = "Assinatura" %>
+<% color = @assinatura[:status] == "ACTIVE" ? "success" : "danger" %>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+  <div class="section full mt-2">
+    <div class="listview-title">
+      Criada em <%= date_from_moip_assinaturas @assinatura[:creation_date] %>
+      <span class="badge badge-<%= color %> weight-500"><%= @assinatura[:status].downcase %></span>
+    </div>
+
+    <ul class="listview simple-listview">
+      <li>
+        <span class="text-secondary">Assinante</span>
+        <span class="text-dark"><%= @assinatura[:customer][:fullname].titleize %></span>
+      </li>
+      <li>
+        <span class="text-secondary">Código</span>
+        <a href="https://conta.wirecard.com.br/subscriptions/<%= @assinatura[:code] %>" target="_blank">
+          <span class="text-primary"><%= @assinatura[:code] %></span>
+        </a>
+      </li>
+      <li>
+        <span class="text-secondary">Valor</span>
+        <span class="text-dark">R$ <%= from_cents @assinatura[:amount] %></span>
+      </li>
+      <li>
+        <span class="text-secondary">Próxima cobrança</span>
+        <span class="text-dark"><%= date_from_moip_assinaturas @assinatura[:next_invoice_date], "%d/%m/%Y" %></span>
+      </li>
+      <li>
+        <span class="text-secondary">Cartão de crédito</span>
+        <span class="text-dark">
+          <%= @assinatura[:customer][:billing_info][:credit_card][:first_six_digits] %>******<%= @assinatura[:customer][:billing_info][:credit_card][:last_four_digits] %>
+          -
+          <span class="text-muted">valid. <%= @assinatura[:customer][:billing_info][:credit_card][:expiration_month] %>/<%= @assinatura[:customer][:billing_info][:credit_card][:expiration_year] %></span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- * App Capsule -->
+
+
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="hammer-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

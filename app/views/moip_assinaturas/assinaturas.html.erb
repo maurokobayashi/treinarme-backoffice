@@ -1,28 +1,57 @@
-<h1>Listing Assinaturas</h1>
+<% @header_title = "Assinaturas" %>
 
-<table>
-  <thead>
-    <tr>
-      <th>assinante</th>
-      <th>status</th>
-      <th>criado em</th>
-      <th>código</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
 
-  <tbody>
+  <div class="section full mt-2">
+    <div class="listview-title">
+      Últimas 50 assinaturas
+    </div>
+  </div>
+  <ul class="listview link-listview">
     <% @assinaturas.each do |assinatura| %>
-      <tr>
-        <td><%= assinatura[:customer][:fullname] %></td>
-        <td><%= assinatura[:status] %></td>
-        <td><%= date_from_moip_assinaturas assinatura[:creation_date] %></td>
-        <td><%= assinatura[:code] %></td>
-        <td><%= link_to "Detalhes", assinatura_path(assinatura[:code]) %></td>
-        <td><%= link_to "Faturas", faturas_path(assinatura[:code]) %></td>
-      </tr>
+      <li>
+        <a href="<%= assinatura_path assinatura[:code] %>">
+          <% color = assinatura[:status] = "ACTIVE" ? "success" : "danger" %>
+          <span class="text-dark">
+            <%= assinatura[:customer][:fullname].titleize %>
+            <span class="text-<%= color %> font-20 wieght-700 me-05">&bullet;</span>
+          </span>
+          <span class="text-muted"><%= date_from_moip_assinaturas assinatura[:creation_date] %></span>
+        </a>
+      </li>
     <% end %>
-  </tbody>
-</table>
+  </ul>
 
-<br>
+</div>
+<!-- * App Capsule -->
+
+
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= faturamento_path %>" class="item">
+    <div class="col">
+      <ion-icon name="calendar-outline"></ion-icon>
+      <strong>Hoje</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item active">
+    <div class="col">
+      <ion-icon name="hammer-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item">
+    <div class="col">
+      <ion-icon name="bulb-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

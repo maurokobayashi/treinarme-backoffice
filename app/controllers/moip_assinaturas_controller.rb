@@ -10,17 +10,21 @@ class MoipAssinaturasController < ApplicationController
 
   # GET @ /assinaturas/:id
   def assinatura
-    @assinatura = Moip::Assinaturas::Subscription.details(:id)
+    get_response = Moip::Assinaturas::Subscription.details(params[:id])
+    if get_response[:success]
+      @assinatura = get_response[:subscription]
+    end
+    puts @assinatura.inspect
   end
 
   # GET @ /assinaturas/:id/faturas
   def faturas
-    @faturas = Moip::Assinaturas::Invoice.list(:id)
+    @faturas = Moip::Assinaturas::Invoice.list(params[:id])
   end
 
   # GET @ /faturas/:id
   def fatura
-    @fatura = Moip::Assinaturas::Invoice.details(:id)
+    @fatura = Moip::Assinaturas::Invoice.details(params[:id])
   end
 
 end

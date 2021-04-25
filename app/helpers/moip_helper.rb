@@ -28,7 +28,7 @@ module MoipHelper
   end
 
   def date_from_moip_assinaturas(moip_date, format=DATE_TIME)
-    datetime = DateTime.new(moip_date[:year], moip_date[:month], moip_date[:day], moip_date[:hour], moip_date[:minute], moip_date[:second], '-03:00')
+    datetime = DateTime.new(moip_date[:year], moip_date[:month], moip_date[:day], moip_date[:hour] || 0, moip_date[:minute] || 0, moip_date[:second] || 0, '-03:00')
     self.date_to_str(datetime, format)
   end
 
