@@ -16,10 +16,12 @@
 
 
 <!-- App Capsule -->
-<div id="appCapsule" class="not-fixed mb-2">
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+
+  <%= column_chart leads_per_day_path, width: "100%", height: "200px" %>
 
   <div class="section full mt-2">
-    <div class="section-title">
+    <div class="listview-title text-primary">
       Total hoje: <%= @totais %> leads
     </div>
   </div>
