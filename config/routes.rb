@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
 
+  get 'sair', to: 'dashboard#sair', as: "signout"
+
   get 'faturamento', to: 'dashboard#faturamento'
   get 'operacao', to: 'dashboard#operacao'
   get 'relatorios', to: 'dashboard#relatorios'

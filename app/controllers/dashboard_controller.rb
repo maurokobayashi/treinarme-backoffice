@@ -27,15 +27,22 @@ class DashboardController < ApplicationController
     @acumulado_mes_passado = acumulado_mes_passado[:summary]
   end
 
+  # GET @ /operacao
   def operacao
   end
 
+  # GET @ /relatorios
   def relatorios
-
   end
 
   # GET @ /bairros
   def bairros
+  end
+
+  # GET @ /sair
+  def sair
+    cookies.delete :backoffice_singed_in
+    redirect_to "https://www.treinar.me"
   end
 
 end
