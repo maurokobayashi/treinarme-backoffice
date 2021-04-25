@@ -60,16 +60,24 @@
         <li>
           <a href="<%= leads_path %>" class="item">
             <div class="in">
-              Leads únicos
-              <span class="text-primary"><%= @leads_unicos_count %></span>
+              Leads
+              <span class="text-primary"><%= @leads_unicos_count %> / <%= @leads_count %></span>
             </div>
           </a>
         </li>
         <li>
           <a href="<%= leads_path %>" class="item">
             <div class="in">
-              Leads total
-              <span class="text-primary"><%= @leads_count %></span>
+              Alunos fechados
+              <span class="text-primary"><%= @leads_fechados %></span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a href="<%= assinaturas_path %>" class="item">
+            <div class="in">
+              Assinaturas novas
+              <span class="text-primary"><%= @assinaturas %></span>
             </div>
           </a>
         </li>

@@ -5,6 +5,8 @@ class DashboardController < ApplicationController
     @saldo = moip_v2_api.balances.show
     @leads_count = Lead.where('DATE(created_at) = ?', Date.today).count
     @leads_unicos_count = Lead.where('DATE(created_at) = ?', Date.today).distinct.count(:phone)
+    @leads_fechados = Lead.won.where('DATE(updated_at) = ?', Date.today).count
+    @assinaturas = Subscription.active.where('DATE(created_at) = ?', Date.today).count
     @cancelamentos_count = SubscriptionEvent.cancelation.where('DATE(created_at) = ?', Date.today).distinct.count(:personal_id)
   end
 
