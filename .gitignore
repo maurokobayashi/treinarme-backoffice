@@ -43,4 +43,5 @@ yarn-debug.log*
 
 
 # custom
-/env
+.env
+*.DS_Store

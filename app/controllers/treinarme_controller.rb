@@ -4,6 +4,7 @@ class TreinarmeController < ApplicationController
   def leads
     @totais = Lead.where('DATE(created_at) = ?', Date.today).distinct.count(:phone)
     query = Lead.where(lead_source: true)
+    query = query.where(status: params[:status]) if params[:status].present?
     query = query.where("name ILIKE ?", "%#{params[:q]}%") if params[:q].present?
     @leads = query.limit(params[:limit] || 20).order(id: :desc)
   end
