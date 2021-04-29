@@ -30,7 +30,7 @@
   <ul class="listview link-listview">
     <% @personals.each do |personal| %>
       <li>
-        <a href="<%= personal_path(personal) %>">
+        <a href="https://www.treinar.me/malandro/personals/<%= personal.id %>" target="_blank">
           <span class="text-dark"><%= personal.name %></span>
           <span class="text-muted"><%= personal.status %></span>
         </a>

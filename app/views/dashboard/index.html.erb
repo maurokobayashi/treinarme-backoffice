@@ -1,6 +1,7 @@
 <%
-  @header_hide_voltar = true
+  @header_title = "Backoffice"
   @bottom_menu_active = "resumo"
+  @header_hide_voltar = true
 %>
 
 <!-- App Capsule -->
@@ -8,14 +9,14 @@
 
   <div class="header-large-title mt-3">
     <div class="text-muted"><%= date_to_str(Time.now) %></div>
-    <h1 class="title">Resumo</h1>
+    <h1 class="title">Treinar.me</h1>
     <!-- <h4 class="subtitle">Resolveu trabalhar é? Então bora!</h4> -->
   </div>
 
   <div class="section mt-3">
     <div class="row">
       <div class="col-6">
-        <a href="contatos.html">
+        <a href="<%= financeiro_path %>">
           <div class="card product-card">
             <div class="card-body">
               <p class="text-secondary font-14 mb-0">Saldo disponível</p>
@@ -28,7 +29,7 @@
         </a>
       </div>
       <div class="col-6">
-        <a href="contatos.html">
+        <a href="<%= financeiro_path %>">
           <div class="card product-card">
             <div class="card-body">
               <p class="text-secondary font-14 mb-0">Saldo futuro</p>

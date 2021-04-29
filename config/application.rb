@@ -11,8 +11,9 @@ module TreinarmeBackoffice
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
-    config.time_zone = 'Brasilia'
+    # Set Time.zone e tradução para português
+    config.time_zone = 'America/Sao_Paulo'
+    config.i18n.default_locale = :"pt-BR"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
