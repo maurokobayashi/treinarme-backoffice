@@ -1,0 +1,34 @@
+<%
+  @header_title = "Alunos fechados"
+  @bottom_menu_active = "operacao"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+
+  <div class="section mt-4">
+    <div class="card">
+      <div class="card-body">
+        <%= column_chart leads_fechados_per_day_path, width: "100%", height: "150px" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="section full mt-2">
+    <div class="listview-title text-primary">
+      Total hoje: <%= @total_hoje %>
+    </div>
+  </div>
+  <ul class="listview link-listview">
+    <% @leads.each do |lead| %>
+      <li>
+        <a href="<%= lead_path(lead) %>">
+          <span class="text-dark"><%= "#{short_name lead.personal.name} (#{lead.personal.leads.won.count})" %></span>
+          <span class="text-muted"><%= date_to_str lead.updated_at %></span>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
+<!-- * App Capsule -->

@@ -43,6 +43,8 @@
 
     <%= yield %>
 
+    <%= render "layouts/bottom_menu" unless @hide_bottom_menu %>
+
     <% unless @header_hide_opcoes %>
     <!-- Action sheet opções -->
     <div class="modal fade action-sheet" id="action-sheet-opcoes" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">

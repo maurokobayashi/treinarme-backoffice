@@ -1,4 +1,7 @@
-<% @header_hide_voltar = true %>
+<%
+  @header_hide_voltar = true
+  @bottom_menu_active = "resumo"
+%>
 
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
@@ -15,7 +18,7 @@
         <a href="contatos.html">
           <div class="card product-card">
             <div class="card-body">
-              <p class="text-secondary mb-0">Saldo disponível</p>
+              <p class="text-secondary font-14 mb-0">Saldo disponível</p>
               <h2 class="title mt-2">
                 <span class="text-muted">R$</span>
                 <%= from_cents @saldo.current.first.amount %>
@@ -28,7 +31,7 @@
         <a href="contatos.html">
           <div class="card product-card">
             <div class="card-body">
-              <p class="text-secondary mb-0">Saldo futuro</p>
+              <p class="text-secondary font-14 mb-0">Saldo futuro</p>
               <h2 class="title mt-2">
                 <span class="text-muted">R$</span>
                 <%= from_cents @saldo.future.first.amount %>
@@ -40,19 +43,9 @@
     </div>
   </div>
 
-  <!-- Avisos -->
-  <div class="section mt-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Faturamento</h5>
-        <%= area_chart faturamento_por_dia_path, width: "100%", curve: false %>
-      </div>
-    </div>
-  </div>
-
   <!-- Ultimos contatos -->
   <div class="section full mt-4">
-    <div class="section-title">Hoje</div>
+    <div class="section-title">Operação hoje</div>
   </div>
   <div class="section">
     <div class="card">
@@ -60,13 +53,13 @@
         <li>
           <a href="<%= leads_path %>" class="item">
             <div class="in">
-              Leads
+              Contatos
               <span class="text-primary"><%= @leads_unicos_count %> / <%= @leads_count %></span>
             </div>
           </a>
         </li>
         <li>
-          <a href="<%= leads_path status: 'won' %>" class="item">
+          <a href="<%= leads_fechados_path %>" class="item">
             <div class="in">
               Alunos fechados
               <span class="text-primary"><%= @leads_fechados %></span>
@@ -93,35 +86,15 @@
     </div>
   </div>
 
+  <div class="section mt-4">
+    <div class="section-title">Faturamento do mês</div>
+    <div class="card">
+      <div class="card-body">
+        <%= area_chart faturamento_por_dia_path, width: "100%", height: "300px", curve: false %>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 <!-- * App Capsule -->
-
-
-<!-- App Bottom Menu -->
-<div class="appBottomMenu">
-  <a href="<%= root_path %>" class="item active">
-    <div class="col">
-      <ion-icon name="bar-chart-outline"></ion-icon>
-      <strong>Resumo</strong>
-    </div>
-  </a>
-  <a href="<%= faturamento_path %>" class="item">
-    <div class="col">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <strong>Hoje</strong>
-    </div>
-  </a>
-  <a href="<%= operacao_path %>" class="item">
-    <div class="col">
-      <ion-icon name="hammer-outline"></ion-icon>
-      <strong>Operação</strong>
-    </div>
-  </a>
-  <a href="<%= relatorios_path %>" class="item">
-    <div class="col">
-      <ion-icon name="bulb-outline"></ion-icon>
-      <strong>Relatórios</strong>
-    </div>
-  </a>
-</div>
-<!-- * App Bottom Menu -->

@@ -1,0 +1,28 @@
+<!-- App Bottom Menu -->
+<div class="appBottomMenu">
+  <a href="<%= root_path %>" class="item <%= 'active' if @bottom_menu_active == 'resumo' %>">
+    <div class="col">
+      <ion-icon name="home-outline"></ion-icon>
+      <strong>Resumo</strong>
+    </div>
+  </a>
+  <a href="<%= operacao_path %>" class="item <%= 'active' if @bottom_menu_active == 'operacao' %>">
+    <div class="col">
+      <ion-icon name="hammer-outline"></ion-icon>
+      <strong>Operação</strong>
+    </div>
+  </a>
+  <a href="<%= financeiro_path %>" class="item <%= 'active' if @bottom_menu_active == 'financeiro' %>">
+    <div class="col">
+      <ion-icon name="cash-outline"></ion-icon>
+      <strong>Financeiro</strong>
+    </div>
+  </a>
+  <a href="<%= relatorios_path %>" class="item <%= 'active' if @bottom_menu_active == 'relatorios' %>">
+    <div class="col">
+      <ion-icon name="bar-chart-outline"></ion-icon>
+      <strong>Relatórios</strong>
+    </div>
+  </a>
+</div>
+<!-- * App Bottom Menu -->

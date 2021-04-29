@@ -85,6 +85,10 @@ class ChartsController < ApplicationController
     render json: Lead.where('DATE(created_at) >= ?', 15.days.ago).group_by_day(:created_at).distinct.count(:phone)
   end
 
+  def leads_fechados_per_day
+    render json: Lead.won.where('DATE(updated_at) >= ?', 15.days.ago).group_by_day(:updated_at).count
+  end
+
   def leads_per_week
     render json: Lead.where('DATE(created_at) >= ?', 90.days.ago).group_by_week(:created_at).distinct.count(:phone)
   end
@@ -99,7 +103,7 @@ class ChartsController < ApplicationController
 
   def faturamento_por_dia
     api = moip_v2_api
-    pedidos = api.order.find_all(filters: { status: { in: ["PAID"] }, createdAt: { bt: [Date.today.at_beginning_of_month.to_s, Date.today.to_s] } }, limit: 1500)
+    pedidos = api.order.find_all(filters: { status: { in: ["PAID"] }, createdAt: { bt: [Date.today.at_beginning_of_month.to_s, Date.today.to_s] } }, limit: 500)
     faturamento = []
     pedidos[:orders].each do |pedido|
       valor = pedido[:amount][:total].to_i/100
@@ -113,7 +117,7 @@ class ChartsController < ApplicationController
       [a, soma]
     end
 
-    pedidos_mes_passado = api.order.find_all(filters: { status: { in: ["PAID"] }, createdAt: { bt: [Date.today.last_month.at_beginning_of_month.to_s, Date.today.last_month.to_s] } }, limit: 1500)
+    pedidos_mes_passado = api.order.find_all(filters: { status: { in: ["PAID"] }, createdAt: { bt: [Date.today.last_month.at_beginning_of_month.to_s, Date.today.last_month.to_s] } }, limit: 500)
     faturamento_mes_passado = []
     pedidos_mes_passado[:orders].each do |pedido|
       valor = pedido[:amount][:total].to_i/100

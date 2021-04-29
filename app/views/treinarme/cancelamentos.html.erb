@@ -1,4 +1,7 @@
-<% @header_title = "Cancelamentos" %>
+<%
+  @header_title = "Cancelamentos"
+  @bottom_menu_active = "operacao"
+%>
 
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
@@ -7,13 +10,13 @@
     <div class="card">
       <div class="card-body">
         <!-- <h5 class="card-title">Por mês</h5> -->
-        <%= column_chart cancelamentos_per_month_path, width: "100%", height: "200px" %>
+        <%= column_chart cancelamentos_per_month_path, width: "100%", height: "150px" %>
       </div>
     </div>
   </div>
 
   <div class="section full mt-4">
-    <div class="section-title">Últimos 15 cancelamentos</div>
+    <div class="listview-title">Últimos 30 cancelamentos</div>
   </div>
   <ul class="listview link-listview">
     <% @cancelamentos.each do |cancelamento| %>
@@ -32,33 +35,3 @@
 
 </div>
 <!-- * App Capsule -->
-
-
-<!-- App Bottom Menu -->
-<div class="appBottomMenu">
-  <a href="<%= root_path %>" class="item">
-    <div class="col">
-      <ion-icon name="bar-chart-outline"></ion-icon>
-      <strong>Resumo</strong>
-    </div>
-  </a>
-  <a href="<%= faturamento_path %>" class="item">
-    <div class="col">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <strong>Hoje</strong>
-    </div>
-  </a>
-  <a href="<%= operacao_path %>" class="item active">
-    <div class="col">
-      <ion-icon name="hammer-outline"></ion-icon>
-      <strong>Operação</strong>
-    </div>
-  </a>
-  <a href="<%= relatorios_path %>" class="item">
-    <div class="col">
-      <ion-icon name="bulb-outline"></ion-icon>
-      <strong>Relatórios</strong>
-    </div>
-  </a>
-</div>
-<!-- * App Bottom Menu -->

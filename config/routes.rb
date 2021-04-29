@@ -3,9 +3,11 @@ Rails.application.routes.draw do
 
   get 'sair', to: 'dashboard#sair', as: "signout"
 
-  get 'faturamento', to: 'dashboard#faturamento'
   get 'operacao', to: 'dashboard#operacao'
+  get 'financeiro', to: 'dashboard#financeiro'
+  get 'financeiro/faturamento', to: 'dashboard#financeiro_faturamento'
   get 'relatorios', to: 'dashboard#relatorios'
+
   get 'bairros', to: 'dashboard#bairros'
 
   get '/assinaturas', to: 'moip_assinaturas#assinaturas'
@@ -18,14 +20,17 @@ Rails.application.routes.draw do
   get '/retentativas', to: 'moip#retentativas'
 
   get '/leads', to: 'treinarme#leads'
+  get '/leads/fechados', to: 'treinarme#leads_fechados', as: "leads_fechados"
   get '/leads/:id', to: 'treinarme#lead', as: "lead"
   get '/personals', to: 'treinarme#personals'
+  get '/personals/:id', to: 'treinarme#personal', as: "personal"
   get '/cancelamentos', to: 'treinarme#cancelamentos'
   get '/cancelamentos/:id', to: 'treinarme#cancelamento', as: "cancelamento"
 
 
   # charts
   get '/charts/leads_per_day', to: 'charts#leads_per_day', as: "leads_per_day"
+  get '/charts/leads_fechados_per_day', to: 'charts#leads_fechados_per_day', as: "leads_fechados_per_day"
   get '/charts/leads_per_week', to: 'charts#leads_per_week', as: "leads_per_week"
   get '/charts/leads_by_substatus', to: 'charts#leads_by_substatus', as: "leads_by_substatus"
 

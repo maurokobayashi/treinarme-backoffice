@@ -1,0 +1,90 @@
+<%
+  @header_title = "Faturamento"
+  @bottom_menu_active = "financeiro"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+
+  <div class="section mt-3">
+    <div class="row">
+      <div class="col-6">
+        <a href="#">
+          <div class="card product-card">
+            <div class="card-body">
+              <p class="text-secondary font-14 mb-0"><%= Time.now.last_month.strftime("%d/%b") %></p>
+              <h2 class="title mt-1">
+                <span class="text-muted">R$</span>
+                <%= from_cents @dia_mes_passado[:amount] %>
+              </h2>
+              <span class="text-muted font-11">(<%= @dia_mes_passado[:count] %> pagamentos)</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="<%= pedidos_path %>">
+          <div class="card product-card">
+            <div class="card-body">
+              <%
+                variacao = (@dia_hoje[:amount] - @dia_mes_passado[:amount])*100 / @dia_mes_passado[:amount].to_f
+                color = variacao >= 0 ? "success" : "danger"
+                sinal = variacao >= 0 ? "&#8593;" : "&#8595;"
+              %>
+              <p class="text-secondary font-14 mb-0">
+                Hoje
+                <span class="text-<%= color %> float-right"><%= sinal.html_safe %><%= variacao.round(0) %>%</span>
+              </p>
+              <h2 class="title mt-1">
+                <span class="text-muted">R$</span>
+                <%= from_cents @dia_hoje[:amount] %>
+              </h2>
+              <span class="text-muted font-11">(<%= @dia_hoje[:count] %> pagamentos)</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-6">
+        <a href="#l">
+          <div class="card product-card">
+            <div class="card-body">
+              <p class="text-secondary font-14 mb-0">
+                <%= Time.now.last_month.strftime("%B") %>
+              </p>
+              <h2 class="title mt-1">
+                <span class="text-muted">R$</span>
+                <%= from_cents @acumulado_mes_passado[:amount] %>
+              </h2>
+              <span class="text-muted font-11">(<%= @acumulado_mes_passado[:count] %> pagamentos)</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-6">
+        <a href="#">
+          <div class="card product-card">
+            <div class="card-body">
+              <%
+                variacao = (@acumulado_mes_corrente[:amount] - @acumulado_mes_passado[:amount])*100 / @acumulado_mes_passado[:amount].to_f
+                color = variacao >= 0 ? "success" : "danger"
+                sinal = variacao >= 0 ? "&#8593;" : "&#8595;"
+              %>
+              <p class="text-secondary font-14 mb-0">
+                <%= Time.now.strftime("%B") %>
+                <span class="text-<%= color %> float-right"><%= sinal.html_safe %><%= variacao.round(0) %>%</span>
+              </p>
+              <h2 class="title mt-1">
+                <span class="text-muted">R$</span>
+                <%= from_cents @acumulado_mes_corrente[:amount] %>
+              </h2>
+              <span class="text-muted font-11">(<%= @acumulado_mes_corrente[:count] %> pagamentos)</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div> <!-- *section -->
+</div>

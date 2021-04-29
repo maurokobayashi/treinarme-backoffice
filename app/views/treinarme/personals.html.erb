@@ -1,11 +1,11 @@
 <%
-  @header_title = "Contatos"
+  @header_title = "Personal trainers"
   @bottom_menu_active = "operacao"
 %>
 
 <!-- Extra Header -->
 <div class="extraHeader not-fixed">
-  <form class="search-form" action="<%= leads_path %>" method="get">
+  <form class="search-form" action="<%= personals_path %>" method="get">
     <div class="form-group searchbox">
         <input type="text" id="q" name="q" class="form-control search rounded" placeholder="Buscar..." value="<%= params[:q] %>">
         <i class="input-icon">
@@ -21,25 +21,18 @@
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mt-2 mb-2">
 
-  <div class="section mt-4">
-    <div class="card">
-      <div class="card-body">
-        <%= column_chart leads_per_day_path, width: "100%", height: "180px" %>
-      </div>
-    </div>
-  </div>
-
   <div class="section full mt-2">
     <div class="listview-title text-primary">
-      Hoje: <%= "#{@totais_hoje[:unicos]} / #{@totais_hoje[:totais]}" %>
+      <a href="<%= personals_path %>">Total (<%= @totais[:total] %>)</a>
+      <a href="<%= personals_path status: 'active' %>">Ativos (<%= @totais[:ativos] %>)</a>
     </div>
   </div>
   <ul class="listview link-listview">
-    <% @leads.each do |lead| %>
+    <% @personals.each do |personal| %>
       <li>
-        <a href="<%= lead_path(lead) %>">
-          <span class="text-dark"><%= lead.name %></span>
-          <span class="text-muted"><%= date_to_str lead.created_at %></span>
+        <a href="<%= personal_path(personal) %>">
+          <span class="text-dark"><%= personal.name %></span>
+          <span class="text-muted"><%= personal.status %></span>
         </a>
       </li>
     <% end %>

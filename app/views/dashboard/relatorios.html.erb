@@ -1,8 +1,10 @@
-<% @header_title = "Relatórios" %>
+<%
+  @header_title = "Relatórios"
+  @bottom_menu_active = "relatorios"
+%>
 
 <!-- App Capsule -->
-<div id="appCapsule" class="not-fixed mb-2">
-  <div class="listview-title mt-2">Relatórios</div>
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
   <ul class="listview link-listview">
     <li>
       <a href="<%= bairros_path %>">Bairros</a>
@@ -24,33 +26,3 @@
 
 </div>
 <!-- * App Capsule -->
-
-
-<!-- App Bottom Menu -->
-<div class="appBottomMenu">
-  <a href="<%= root_path %>" class="item">
-    <div class="col">
-      <ion-icon name="bar-chart-outline"></ion-icon>
-      <strong>Resumo</strong>
-    </div>
-  </a>
-  <a href="<%= faturamento_path %>" class="item">
-    <div class="col">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <strong>Hoje</strong>
-    </div>
-  </a>
-  <a href="<%= operacao_path %>" class="item">
-    <div class="col">
-      <ion-icon name="hammer-outline"></ion-icon>
-      <strong>Operação</strong>
-    </div>
-  </a>
-  <a href="<%= relatorios_path %>" class="item active">
-    <div class="col">
-      <ion-icon name="bulb-outline"></ion-icon>
-      <strong>Relatórios</strong>
-    </div>
-  </a>
-</div>
-<!-- * App Bottom Menu -->

@@ -1,0 +1,28 @@
+<%
+  @header_title = "Financeiro"
+  @bottom_menu_active = "financeiro"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+  <ul class="listview link-listview">
+    <li>
+      <a href="<%= pedidos_path %>">Pagamentos</a>
+    </li>
+    <li>
+      <a href="<%= financeiro_faturamento_path %>">Faturamento</a>
+    </li>
+    <li>
+      <a href="<%= assinaturas_path %>">Assinaturas</a>
+    </li>
+    <li class="divider-title">Conta Moip</li>
+    <li>
+      <a href="https://conta.wirecard.com.br/transfers/bank_account/new" target="_blank">Sacar dinheiro</a>
+    </li>
+    <li>
+      <a href="https://conta.wirecard.com.br/transfers" target="_blank">Transferências realizadas</a>
+    </li>
+  </ul>
+
+</div>
+<!-- * App Capsule -->
