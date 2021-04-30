@@ -5,10 +5,14 @@ Rails.application.routes.draw do
 
   get 'operacao', to: 'dashboard#operacao'
   get 'financeiro', to: 'dashboard#financeiro'
-  get 'financeiro/faturamento', to: 'dashboard#financeiro_faturamento'
   get 'relatorios', to: 'dashboard#relatorios'
 
-  get 'bairros', to: 'dashboard#bairros'
+  get 'financeiro/faturamento', to: 'dashboard#financeiro_faturamento'
+
+  # relatorios
+  get 'relatorios/bairros', to: 'relatorios#bairros', as: "relatorios_bairros"
+  get 'relatorios/leads', to: 'relatorios#leads', as: "relatorios_leads"
+  get 'relatorios/personals', to: 'relatorios#personals', as: "relatorios_personals"
 
   get '/assinaturas', to: 'moip_assinaturas#assinaturas'
   get '/assinaturas/:id', to: 'moip_assinaturas#assinatura', as: "assinatura"
@@ -29,15 +33,20 @@ Rails.application.routes.draw do
 
 
   # charts
-  get '/charts/leads_per_day', to: 'charts#leads_per_day', as: "leads_per_day"
-  get '/charts/leads_fechados_per_day', to: 'charts#leads_fechados_per_day', as: "leads_fechados_per_day"
-  get '/charts/leads_per_week', to: 'charts#leads_per_week', as: "leads_per_week"
-  get '/charts/leads_by_substatus', to: 'charts#leads_by_substatus', as: "leads_by_substatus"
+  get 'charts/bairros_mais_buscados', to: 'charts#bairros_mais_buscados', as: "bairros_mais_buscados"
+  get 'charts/bairros_mais_concorridos', to: 'charts#bairros_mais_concorridos', as: "bairros_mais_concorridos"
 
   get '/charts/cancelamentos_per_month', to: 'charts#cancelamentos_per_month', as: "cancelamentos_per_month"
 
   get '/charts/faturamento_por_dia', to: 'charts#faturamento_por_dia', as: "faturamento_por_dia"
 
-  get 'charts/bairros_mais_buscados', to: 'charts#bairros_mais_buscados', as: "bairros_mais_buscados"
-  get 'charts/bairros_mais_concorridos', to: 'charts#bairros_mais_concorridos', as: "bairros_mais_concorridos"
+  get '/charts/leads_per_day', to: 'charts#leads_per_day', as: "leads_per_day"
+  get '/charts/leads_fechados_per_day', to: 'charts#leads_fechados_per_day', as: "leads_fechados_per_day"
+  get '/charts/leads_per_week', to: 'charts#leads_per_week', as: "leads_per_week"
+  get '/charts/leads_by_substatus', to: 'charts#leads_by_substatus', as: "leads_by_substatus"
+  get '/charts/leads_per_source', to: 'charts#leads_won_per_source', as: "leads_per_source"
+
+  # get '/charts/personals_mais_solicitados', to: 'charts#personals_mais_solicitados', as: "personals_mais_solicitados"
+  # get '/charts/personals_mais_contratados', to: 'charts#personals_mais_contratados', as: "personals_mais_contratados"
+
 end

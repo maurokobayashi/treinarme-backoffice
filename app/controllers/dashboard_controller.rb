@@ -44,10 +44,6 @@ class DashboardController < ApplicationController
     @assinaturas = Subscription.active.where(created_at: Date.today.all_day).count
   end
 
-  # GET @ /bairros
-  def bairros
-  end
-
   # GET @ /sair
   def sair
     cookies.delete :backoffice_singed_in

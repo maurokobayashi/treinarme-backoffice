@@ -1,0 +1,24 @@
+<%
+  @header_title = "Relatórios"
+  @bottom_menu_active = "relatorios"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+
+  <div class="section full mt-2">
+    <div class="listview-title">
+      Personals mais contratados
+    </div>
+
+    <ul class="listview simple-listview">
+      <% @resultados.each do |resultado| %>
+      <li>
+        <span class="text-secondary"><%= resultado[0].name %></span>
+        <span class="text-dark"><%= resultado[1] %></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- * App Capsule -->

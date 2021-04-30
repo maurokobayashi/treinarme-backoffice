@@ -1,40 +1,7 @@
-<h1>Leads</h1>
-
-<h3>Hoje: <%= @totais[:hoje_unicos] %> leads únicos (<%= @totais[:hoje] %> total)</h3>
+<%= pie_chart Lead.won.group(:lead_source).where('DATE(created_at) >= ?', 180.days.ago).count, title: "Por lead source (180 dias)" %>
 
 <%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
 
 <%= area_chart leads_per_week_path, title: "Por semana (90 dias)" %>
 
 <%= line_chart leads_by_substatus_path, title: "Por status (1 ano)" %>
-
-<br>
-<br>
-
-<h3>Últimos <%= @leads.size %> leads</h3>
-<table>
-  <thead style="text-align:left;">
-    <tr>
-      <th>nome</th>
-      <th>local</th>
-      <th>mensagem</th>
-      <th>criado em</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @leads.each do |lead| %>
-      <tr>
-        <td><%= lead.name %></td>
-        <td><%= lead.location %></td>
-        <td style="max-width: 300px;"><%= lead.comment %></td>
-        <td><%= date_to_str lead.created_at %></td>
-        <td><%= link_to "Detalhes", lead_path(lead.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-<a href="javascript:window.history.back();">Voltar</a>

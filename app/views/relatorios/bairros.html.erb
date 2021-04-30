@@ -1,0 +1,45 @@
+<%
+  @header_title = "Relatórios"
+  @bottom_menu_active = "relatorios"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mt-2 mb-2">
+
+  <div class="section full mt-2">
+    <div class="section-title">
+      Bairros mais concorridos
+      <div class="font-12">
+        <a href="#" class="dropdown-toggle text-secondary" data-bs-toggle="dropdown">
+          nos últimos <%= params[:dias].present? ? "#{params[:dias]}" : "180" %> dias
+        </a>
+        <div class="dropdown-menu dropdown-menu-right font-14">
+          <a href="<%= relatorios_bairros_path dias: 365 %>" class="dropdown-item">
+            365 dias
+          </a>
+          <a href="<%= relatorios_bairros_path dias: 180 %>" class="dropdown-item">
+            180 dias
+          </a>
+          <a href="<%= relatorios_bairros_path dias: 90 %>" class="dropdown-item">
+            90 dias
+          </a>
+          <a href="<%= relatorios_bairros_path dias: 30 %>" class="dropdown-item">
+            30 dias
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="listview simple-listview">
+      <% @resultados.each do |resultado| %>
+      <% porcentagem = number_to_percentage resultado[2]/resultado[1].to_f*100, precision: 0 %>
+      <li>
+        <span class="text-secondary"><%= "#{resultado[0].capitalize} (#{resultado[3]})" %></span>
+        <span class="text-dark"><%= "#{resultado[1]} / #{resultado[2]}" %> = <span class="text-primary"><%= porcentagem %></span></span>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- * App Capsule -->
+
