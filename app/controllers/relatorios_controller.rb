@@ -1,17 +1,5 @@
 class RelatoriosController < ApplicationController
 
-  def personals
-    hash = Lead.won.group(:personal_id).order(:personal_id).count
-    sorted_array = Hash[hash.sort_by { |k,v| [-1 * v, -1 * k] }].to_a.first(30)
-
-    sorted_array.each do |i|
-      p = Personal.find i[0]
-      i[0] = p
-    end
-
-    @resultados = sorted_array
-  end
-
   def bairros
     last_days = params[:dias] || 180
     limit = 50
@@ -53,8 +41,61 @@ class RelatoriosController < ApplicationController
     @resultados = resultado.sort_by{|el| el[3]}.reverse.first(params[:limit].try(:to_i) || limit)
   end
 
-  def leads
+  def horarios
+    qtd_dias = params[:dias].to_i || 180
+    result_leads = []
 
+    uniq_leads = Lead.where('DATE(created_at) >= ? AND array_length(requested_time, 1) > 0', qtd_dias.days.ago).to_a.uniq{|a|a.phone}
+    uniq_leads.each do |lead|
+      lead.requested_time.each do |i|
+        horarios = i.split(",")
+        horarios.each{|h| result_leads.push h.strip}
+      end
+    end
+
+    result_deals = []
+    uniq_deals = Lead.won.where('DATE(created_at) >= ? AND array_length(requested_time, 1) > 0', qtd_dias.days.ago)
+    uniq_deals.each do |lead|
+      lead.requested_time.each do |i|
+        horarios = i.split(",")
+        horarios.each{|h| result_deals.push h.strip}
+      end
+    end
+
+    leads_array = result_leads.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }.to_a
+    deals_array = result_deals.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }.to_a
+
+    #sorting
+    leads_array = leads_array.each{|h| h[0] = h[0].gsub("h", "").to_i}.sort.each{|h| h[0] = h[0].to_s+"h"}
+    deals_array = deals_array.each{|h| h[0] = h[0].gsub("h", "").to_i}.sort.each{|h| h[0] = h[0].to_s+"h"}
+
+    final_array = []
+    leads_array.each do |l|
+      item = deals_array.select{|d| d[0] == l[0]}.first || []
+      final_array.push [l[0], l[1], item[1] || 0]
+    end
+    puts final_array
+    @resultados = final_array
+  end
+
+  def leads
+  end
+
+  def personals
+    status = params[:status].present? ? (params[:status] == "active" ? 1 : 2) : nil
+
+    query = Lead.won.joins(:personal)
+    query = query.where("personals.status = ?", status) if status.present?
+    query = query.group("leads.personal_id").order("leads.personal_id")
+    hash = query.count
+    sorted_array = Hash[hash.sort_by { |k,v| [-1 * v, -1 * k] }].to_a.first(30)
+
+    sorted_array.each do |i|
+      p = Personal.find i[0]
+      i[0] = p
+    end
+
+    @resultados = sorted_array
   end
 
 

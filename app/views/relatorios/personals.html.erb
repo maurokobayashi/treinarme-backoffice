@@ -7,15 +7,33 @@
 <div id="appCapsule" class="not-fixed mt-2 mb-2">
 
   <div class="section full mt-2">
-    <div class="listview-title">
+    <div class="section-title">
       Personals mais contratados
+      <div class="font-12">
+        <a href="#" class="dropdown-toggle text-secondary" data-bs-toggle="dropdown">
+          status: <%= params[:status].present? ? "#{params[:status]}" : "todos" %>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right font-14">
+          <a href="<%= relatorios_personals_path %>" class="dropdown-item">
+            todos
+          </a>
+          <a href="<%= relatorios_personals_path status: "active" %>" class="dropdown-item">
+            ativos
+          </a>
+          <a href="<%= relatorios_personals_path status: "inactive" %>" class="dropdown-item">
+            inativos
+          </a>
+        </div>
+      </div>
     </div>
 
-    <ul class="listview simple-listview">
+    <ul class="listview link-listview">
       <% @resultados.each do |resultado| %>
       <li>
-        <span class="text-secondary"><%= resultado[0].name %></span>
-        <span class="text-dark"><%= resultado[1] %></span>
+        <a href="https://www.treinar.me/malandro/personals/<%= resultado[0].id %>" target="_blank">
+          <span class="text-secondary"><%= resultado[0].name %></span>
+          <span class="text-dark"><%= resultado[1] %></span>
+        </a>
       </li>
       <% end %>
     </ul>

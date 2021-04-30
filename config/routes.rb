@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   # relatorios
   get 'relatorios/bairros', to: 'relatorios#bairros', as: "relatorios_bairros"
+  get 'relatorios/horarios', to: 'relatorios#horarios', as: "relatorios_horarios"
   get 'relatorios/leads', to: 'relatorios#leads', as: "relatorios_leads"
   get 'relatorios/personals', to: 'relatorios#personals', as: "relatorios_personals"
 
