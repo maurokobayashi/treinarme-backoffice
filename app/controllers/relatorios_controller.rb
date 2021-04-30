@@ -42,7 +42,7 @@ class RelatoriosController < ApplicationController
   end
 
   def horarios
-    qtd_dias = params[:dias].to_i || 180
+    qtd_dias = params[:dias] ? params[:dias].to_i : 180
     result_leads = []
 
     uniq_leads = Lead.where('DATE(created_at) >= ? AND array_length(requested_time, 1) > 0', qtd_dias.days.ago).to_a.uniq{|a|a.phone}
@@ -74,11 +74,25 @@ class RelatoriosController < ApplicationController
       item = deals_array.select{|d| d[0] == l[0]}.first || []
       final_array.push [l[0], l[1], item[1] || 0]
     end
-    puts final_array
     @resultados = final_array
   end
 
   def leads
+  end
+
+  def palavras
+    limit = params[:limit] || 50
+    qtd_leads = params[:qtd_leads] ? params[:qtd_leads].to_i : 1000
+    min_occurrences = 5
+
+    leads = Lead.where(lead_source: true).where.not(comment: [nil, ""]).last(qtd_leads).uniq{|l| l.phone}
+    comments = leads.map {|l| l.comment}
+    joined_comments = comments.join(" ").gsub("\n", " ").gsub("\r", " ")
+    downcase_comments = ActiveSupport::Inflector.transliterate joined_comments.downcase
+    word_cloud = downcase_comments.gsub(/para|gostaria|estou|tenho|fazer|preciso|quero|tudo|anos|minha|mais|muito|saber|como|nome|voce|voltar|esta|moro|tambem|seria|queria|dias|entao|mesmo|vezes|ficar|pouco|acima|conta|aqui|meus|chamo|pois|isso|porem|ganho|faco|desde|aguardo|desde|duas|sempre|procuro|buscando|alguns|cada|qual|assim|tive|obrigado|obrigada|quanta|muito|devido/, "")
+                  .chars.select {|c| c =~ Regexp.union(/[a-z]/, " ")}.join("")
+
+    @word_cloud = word_cloud.split.select{|w| w.length > 3}.group_by{|w| w}.map{|k,v| [k,v.size]}.sort_by(&:last).select{|x,y| y>min_occurrences}.last(limit).reverse.to_h
   end
 
   def personals
@@ -97,7 +111,6 @@ class RelatoriosController < ApplicationController
 
     @resultados = sorted_array
   end
-
 
 
 private

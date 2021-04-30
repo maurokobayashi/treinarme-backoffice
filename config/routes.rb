@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'relatorios/horarios', to: 'relatorios#horarios', as: "relatorios_horarios"
   get 'relatorios/leads', to: 'relatorios#leads', as: "relatorios_leads"
   get 'relatorios/personals', to: 'relatorios#personals', as: "relatorios_personals"
+  get 'relatorios/palavras', to: 'relatorios#palavras', as: "relatorios_palavras"
 
   get '/assinaturas', to: 'moip_assinaturas#assinaturas'
   get '/assinaturas/:id', to: 'moip_assinaturas#assinatura', as: "assinatura"
