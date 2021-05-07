@@ -14,7 +14,6 @@ class MoipAssinaturasController < ApplicationController
     if get_response[:success]
       @assinatura = get_response[:subscription]
     end
-    puts @assinatura.inspect
   end
 
   # GET @ /assinaturas/:id/faturas

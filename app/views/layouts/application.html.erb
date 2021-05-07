@@ -12,14 +12,14 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32"> -->
+    <%= favicon_pack_tag 'favicon.ico' %>
     <!-- <link rel="manifest" href="__manifest.json"> -->
   </head>
 
   <body>
 
     <!-- App Header -->
-    <div class="appHeader not-fixed bg-primary text-light">
+    <div class="appHeader not-fixed bg-secondary text-light">
       <div class="left">
         <% unless @header_hide_voltar %>
         <a href="#" class="headerButton goBack">

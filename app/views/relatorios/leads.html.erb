@@ -1,7 +1,21 @@
-<%= pie_chart Lead.won.group(:lead_source).where('DATE(created_at) >= ?', 180.days.ago).count, title: "Por lead source (180 dias)" %>
-
-<%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
-
-<%= area_chart leads_per_week_path, title: "Por semana (90 dias)" %>
-
-<%= line_chart leads_by_substatus_path, title: "Por status (1 ano)" %>
+<div class="me-2 mt-2 mb-6">
+  <%= pie_chart Lead.won.group(:lead_source).where('DATE(created_at) >= ?', 180.days.ago).count, title: "Alunos fechados por lead source (180 dias)" %>
+  <br>
+  <br>
+  <%= pie_chart Lead.joins(:personal).group("personals.gender").where('DATE(leads.created_at) >= ?', 180.days.ago).distinct.count("leads.phone"), title: "Contatos por gênero (180 dias)" %>
+  <br>
+  <br>
+  <%= pie_chart Lead.won.joins(:personal).group("personals.gender").where('DATE(leads.created_at) >= ?', 180.days.ago).distinct.count("leads.phone"), title: "Alunos fechados por gênero (180 dias)" %>
+  <br>
+  <br>
+  <%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
+  <br>
+  <br>
+  <%= area_chart leads_per_week_path, title: "Por semana (90 dias)" %>
+  <br>
+  <br>
+  <%= line_chart leads_by_substatus_path, title: "Por status (1 ano)" %>
+  <br>
+  <br><br>
+  <br>
+</div>

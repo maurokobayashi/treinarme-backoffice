@@ -102,7 +102,7 @@ class RelatoriosController < ApplicationController
     query = query.where("personals.status = ?", status) if status.present?
     query = query.group("leads.personal_id").order("leads.personal_id")
     hash = query.count
-    sorted_array = Hash[hash.sort_by { |k,v| [-1 * v, -1 * k] }].to_a.first(30)
+    sorted_array = Hash[hash.sort_by { |k,v| [-1 * v, -1 * k] }].to_a.first(50)
 
     sorted_array.each do |i|
       p = Personal.find i[0]

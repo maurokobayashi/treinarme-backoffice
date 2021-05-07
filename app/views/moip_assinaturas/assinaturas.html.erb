@@ -12,7 +12,7 @@
     <% @assinaturas.each do |assinatura| %>
       <li>
         <a href="<%= assinatura_path assinatura[:code] %>">
-          <% color = assinatura[:status] = "ACTIVE" ? "success" : "danger" %>
+          <% color = assinatura[:status] == "ACTIVE" ? "success" : "danger" %>
           <span class="text-dark">
             <%= assinatura[:customer][:fullname].titleize %>
             <span class="text-<%= color %> font-20 wieght-700 me-05">&bullet;</span>
