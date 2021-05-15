@@ -26,7 +26,7 @@ class TreinarmeController < ApplicationController
     query = Personal.all
     query = query.where(status: params[:status]) if params[:status].present?
     query = query.where("name ILIKE ?", "%#{params[:q]}%") if params[:q].present?
-    @personals = query.limit(params[:limit] || 30).order(id: :desc)
+    @personals = query.limit(params[:limit] || 50).order(id: :desc)
   end
 
   # GET @ /cancelamentos

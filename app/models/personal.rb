@@ -51,4 +51,9 @@ class Personal < ActiveRecord::Base
   scope :inactive, -> { where(status: Personal.statuses[:inactive]) }
   scope :removed, -> { where(status: Personal.statuses[:removed]) }
 
+
+  def avaliacoes
+    Review.joins(:lead).approved.where("leads.personal_id = ?", self.id).order(id: :desc)
+  end
+
 end

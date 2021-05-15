@@ -29,10 +29,18 @@
   </div>
   <ul class="listview link-listview">
     <% @personals.each do |personal| %>
+      <% color_status = personal.active? ? "success" : (personal.trial? ? "gray" : "primary") %>
       <li>
         <a href="https://www.treinar.me/malandro/personals/<%= personal.id %>" target="_blank">
-          <span class="text-dark"><%= personal.name %></span>
-          <span class="text-muted"><%= personal.status %></span>
+          <span class="text-dark">
+            <span class="text-<%= color_status %> font-20 wieght-700">&bullet;</span>
+            <%= personal.name %>
+          </span>
+          <div class="text-gray font-11">
+            <span class="text-gray"><%= personal.leads.count %></span> -
+            <span class="text-success"><%= personal.leads.won.count %></span> -
+            <span class="text-warning"><%= personal.avaliacoes.count %></span>
+          </div>
         </a>
       </li>
     <% end %>

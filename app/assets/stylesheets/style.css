@@ -40,6 +40,8 @@ body {
 .float-left { float: left !important; }
 .float-right { float: right !important; }
 
+.font-9 {font-size:9px!important;}
+.font-10 {font-size:10px!important;}
 .font-11 { font-size: 11px !important; }
 .font-12 { font-size: 12px !important; }
 .font-13 { font-size: 13px !important; }
@@ -51,6 +53,9 @@ body {
 .font-19 { font-size: 19px !important; }
 .font-20 { font-size: 20px !important; }
 .font-25 { font-size: 25px !important; }
+
+.text-gray,
+a.text-gray { color: #989898 !important; }
 
 .weight-300 { font-weight: 300 !important; }
 .weight-400 { font-weight: 400 !important; }
