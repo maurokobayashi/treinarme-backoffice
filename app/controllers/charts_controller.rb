@@ -155,7 +155,11 @@ class ChartsController < ApplicationController
   end
 
   def leads_by_substatus
-    render json: Lead.where('DATE(created_at) >= ? AND substatus IN (2,6)', 1.year.ago).group(:substatus).group_by_month(:created_at, format: "%b-%Y").distinct.count(:phone).chart_json
+    render json: Lead.where('DATE(updated_at) >= ? AND substatus = ?', Date.today.at_beginning_of_month-1.year, 6).group_by_month(:updated_at, format: "%b-%Y").count
+  end
+
+  def leads_by_wordcount
+    # leads = Lead.limit(500).group("length(comment)").count
   end
 
   def leads_won_per_source

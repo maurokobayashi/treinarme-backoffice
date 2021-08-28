@@ -8,13 +8,19 @@
   <%= pie_chart Lead.won.joins(:personal).group("personals.gender").where('DATE(leads.created_at) >= ?', 180.days.ago).distinct.count("leads.phone"), title: "Alunos fechados por gênero (180 dias)" %>
   <br>
   <br>
+  <%= column_chart Lead.where("age > ? AND age < ?", 12, 71).group(:age).distinct(:phone).count, title: "Por idade" %>
+  <br>
+  <br>
+  <%= column_chart Lead.won.where("length(comment) > 10 AND length(comment) < 200").group("length(comment)").count.sort_by {|length, qtd| length} %>
+  <br>
+  <br>
   <%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
   <br>
   <br>
   <%= area_chart leads_per_week_path, title: "Por semana (90 dias)" %>
   <br>
   <br>
-  <%= line_chart leads_by_substatus_path, title: "Por status (1 ano)" %>
+  <%= column_chart leads_by_substatus_path, title: "Alunos fechados (1 ano)" %>
   <br>
   <br><br>
   <br>
