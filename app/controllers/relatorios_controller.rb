@@ -1,11 +1,11 @@
 class RelatoriosController < ApplicationController
 
   def bairros
-    last_days = params[:dias] || 180
+    last_days = params[:dias].try(:to_i) || 180
     limit = 50
     resultado = []
 
-    locations_fechados = Lead.won.where("DATE(created_at) >= ?", Date.today-(params[:dias].try(:to_i) || last_days)).group("location").count
+    locations_fechados = Lead.won.where("DATE(created_at) >= ?", Date.today-last_days).group("location").count
     array_fechados = locations_fechados.sort_by{|_key, value| -value}.to_a
     array_fechados.each {|item| item[0] = normalize_bairro(item[0])}
 
@@ -96,10 +96,12 @@ class RelatoriosController < ApplicationController
   end
 
   def personals
+    last_days = params[:dias].try(:to_i)
     status = params[:status].present? ? (params[:status] == "active" ? 1 : 2) : nil
 
     query = Lead.won.joins(:personal)
     query = query.where("personals.status = ?", status) if status.present?
+    query = query.where("DATE(leads.created_at) >= ?", Date.today-last_days) if last_days.present?
     query = query.group("leads.personal_id").order("leads.personal_id")
     hash = query.count
     sorted_array = Hash[hash.sort_by { |k,v| [-1 * v, -1 * k] }].to_a.first(50)

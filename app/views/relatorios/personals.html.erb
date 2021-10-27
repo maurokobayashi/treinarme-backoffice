@@ -17,11 +17,30 @@
           <a href="<%= relatorios_personals_path %>" class="dropdown-item">
             todos
           </a>
-          <a href="<%= relatorios_personals_path status: "active" %>" class="dropdown-item">
+          <a href="<%= relatorios_personals_path(status: "active", dias: params[:dias]) %>" class="dropdown-item">
             ativos
           </a>
-          <a href="<%= relatorios_personals_path status: "inactive" %>" class="dropdown-item">
+          <a href="<%= relatorios_personals_path(status: "inactive", dias: params[:dias]) %>" class="dropdown-item">
             inativos
+          </a>
+        </div>
+
+
+        <a href="#" class="dropdown-toggle text-secondary ms-2" data-bs-toggle="dropdown">
+          últimos <%= params[:dias].present? ? "#{params[:dias]}" : "180" %> dias
+        </a>
+        <div class="dropdown-menu dropdown-menu-right font-14">
+          <a href="<%= relatorios_personals_path(status: params[:status], dias: 365) %>" class="dropdown-item">
+            365 dias
+          </a>
+          <a href="<%= relatorios_personals_path(status: params[:status], dias: 180) %>" class="dropdown-item">
+            180 dias
+          </a>
+          <a href="<%= relatorios_personals_path(status: params[:status], dias: 90) %>" class="dropdown-item">
+            90 dias
+          </a>
+          <a href="<%= relatorios_personals_path(status: params[:status], dias: 30) %>" class="dropdown-item">
+            30 dias
           </a>
         </div>
       </div>
