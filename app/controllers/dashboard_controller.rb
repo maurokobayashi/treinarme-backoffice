@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
     @leads_unicos_count = Lead.where(created_at: Date.today.all_day).distinct.count(:phone)
     @leads_fechados = Lead.won.where(updated_at: Date.today.all_day).count
     @assinaturas = Subscription.active.where(created_at: Date.today.all_day).count
+    @avaliacoes_count = Review.where(created_at: Date.today.all_day).count
     @cancelamentos_count = SubscriptionEvent.cancelation.where(created_at: Date.today.all_day).distinct.count(:personal_id)
   end
 

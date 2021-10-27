@@ -11,9 +11,6 @@
   <%= column_chart Lead.where("age > ? AND age < ?", 12, 71).group(:age).distinct(:phone).count, title: "Por idade" %>
   <br>
   <br>
-  <%= column_chart Lead.won.where("length(comment) > 10 AND length(comment) < 200").group("length(comment)").count.sort_by {|length, qtd| length} %>
-  <br>
-  <br>
   <%= column_chart leads_per_day_path, title: "Por dia (15 dias)" %>
   <br>
   <br>
