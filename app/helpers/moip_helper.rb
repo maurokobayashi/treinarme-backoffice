@@ -15,11 +15,7 @@ module MoipHelper
   end
 
   def date_to_str(time, format=DATE_TIME)
-    unless time.blank?
-      time.strftime(format)
-    else
-      nil
-    end
+    I18n.l(time, format: format).downcase unless time.blank?
   end
 
   def date_from_moip_v2(date, format=MOIP_V2_TIME)

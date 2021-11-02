@@ -13,7 +13,7 @@ module TreinarmeBackoffice
 
     # Set Time.zone e tradução para português
     config.time_zone = 'America/Sao_Paulo'
-    config.i18n.default_locale = :"pt-BR"
+    config.i18n.default_locale = :'pt-BR'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

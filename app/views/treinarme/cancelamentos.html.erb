@@ -16,7 +16,7 @@
   </div>
 
   <div class="section full mt-4">
-    <div class="listview-title">Últimos 30 cancelamentos</div>
+    <div class="listview-title">Últimos <%= params[:limit] || 50 %> cancelamentos</div>
   </div>
   <ul class="listview link-listview">
     <% @cancelamentos.each do |cancelamento| %>

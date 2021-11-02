@@ -1,0 +1,27 @@
+<%
+  @header_title = "Avaliações"
+  @bottom_menu_active = "operacao"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+
+  <div class="section full mt-4">
+    <div class="listview-title">Últimas <%= params[:limit] || 20 %> avaliações</div>
+  </div>
+  <ul class="listview link-listview">
+    <% @avaliacoes.each do |avaliacao| %>
+      <li>
+        <a href="<%= avaliacao_path(avaliacao.id) %>">
+          <span class="text-secondary">
+            <%= avaliacao.lead.personal.name %>
+            <span class="text-muted">&nbsp;&bullet;&nbsp;<%= avaliacao.lead.name %></span>
+          </span>
+          <span class="text-muted"><%= date_to_str(avaliacao.created_at, "%d/%b") %></span>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
+<!-- * App Capsule -->

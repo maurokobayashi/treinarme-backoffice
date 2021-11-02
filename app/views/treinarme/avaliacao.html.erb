@@ -1,0 +1,39 @@
+<%
+  @header_title = "Avaliação"
+  @bottom_menu_active = "operacao"
+%>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="not-fixed mb-2">
+  <div class="section full mt-2">
+    <div class="listview-title">
+      <span class="badge badge-success weight-600"><%= @avaliacao.rate %></span>
+      <%= date_to_str @avaliacao.created_at %>
+    </div>
+    <% if @avaliacao.question1.present? %>
+      <div class="section full">
+        <div class="wide-block pt-2 pb-2 mb-2 font-13">
+          <%= @avaliacao.question1 %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @avaliacao.question2.present? %>
+      <div class="section full">
+        <div class="wide-block pt-2 pb-2 mb-2 font-13">
+          <%= @avaliacao.question2 %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @avaliacao.question3.present? %>
+      <div class="section full">
+        <div class="wide-block pt-2 pb-2 mb-2 font-13">
+          <%= @avaliacao.question3 %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+<!-- * App Capsule -->

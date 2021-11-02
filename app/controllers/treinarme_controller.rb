@@ -29,10 +29,20 @@ class TreinarmeController < ApplicationController
     @personals = query.limit(params[:limit] || 50).order(id: :desc)
   end
 
+  # GET @ /avaliacoes
+  def avaliacoes
+    @avaliacoes = Review.limit(params[:limit] || 20).order(id: :desc)
+  end
+
+  # GET @ /avaliacoes/:id
+  def avaliacao
+    @avaliacao = Review.find params[:id]
+  end
+
   # GET @ /cancelamentos
   def cancelamentos
     @totais = {mes: SubscriptionEvent.cancelation.where('DATE(created_at) >= ?', Date.today.at_beginning_of_month).distinct.count(:personal_id)}
-    @cancelamentos = SubscriptionEvent.cancelation.last(30).reverse
+    @cancelamentos = SubscriptionEvent.cancelation.limit(params[:limit] || 50).order(id: :desc)
   end
 
   # GET @ /cancelamentos/:id

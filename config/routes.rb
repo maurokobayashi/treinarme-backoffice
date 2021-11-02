@@ -25,11 +25,14 @@ Rails.application.routes.draw do
   get '/pedido/:id', to: 'moip#pedido', as: "pedido"
   get '/retentativas', to: 'moip#retentativas'
 
+  # operação
   get '/leads', to: 'treinarme#leads'
   get '/leads/fechados', to: 'treinarme#leads_fechados', as: "leads_fechados"
   get '/leads/:id', to: 'treinarme#lead', as: "lead"
   get '/personals', to: 'treinarme#personals'
   get '/personals/:id', to: 'treinarme#personal', as: "personal"
+  get '/avaliacoes', to: 'treinarme#avaliacoes'
+  get '/avaliacoes/:id', to: 'treinarme#avaliacao', as: "avaliacao"
   get '/cancelamentos', to: 'treinarme#cancelamentos'
   get '/cancelamentos/:id', to: 'treinarme#cancelamento', as: "cancelamento"
 

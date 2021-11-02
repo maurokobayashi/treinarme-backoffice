@@ -3,8 +3,8 @@
   @bottom_menu_active = "operacao"
 %>
 
-<% assinou_denovo = @assinatura.created_at > @cancelamento.created_at %>
-<% assinatura_expirada = @expiracao <= Date.today %>
+<% assinou_denovo = @assinatura.present? ? (@assinatura.created_at > @cancelamento.created_at) : false %>
+<% assinatura_expirada = @expiracao.present? ? (@expiracao <= Date.today) : false %>
 
 <!-- App Capsule -->
 <div id="appCapsule" class="not-fixed mb-2">
@@ -21,12 +21,15 @@
           </span>
         </a>
       </li>
+      <% if @assinatura.present? %>
       <li>
         <a href="https://conta.wirecard.com.br/subscriptions/<%= @assinatura.code %>" target="_blank">
           <span class="text-secondary">Assinatura</span>
           <span class="text-dark"><%= @assinatura.code %></span>
         </a>
       </li>
+      <% end %>
+      <% if @expiracao.present? %>
       <li>
         <a>
           <span class="text-secondary">Expira em</span>
@@ -39,6 +42,7 @@
           </span>
         </a>
       </li>
+      <% end %>
       <% if assinou_denovo %>
       <li>
         <a>
