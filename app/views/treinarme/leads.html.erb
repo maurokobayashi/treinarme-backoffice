@@ -39,7 +39,7 @@
       <li>
         <a href="<%= lead_path(lead) %>">
           <span class="text-dark"><%= lead.name %></span>
-          <span class="text-muted"><%= date_to_str lead.created_at %></span>
+          <span class="text-muted"><%= date_to_str lead.created_at, "%d/%m %Hh%M" %></span>
         </a>
       </li>
     <% end %>

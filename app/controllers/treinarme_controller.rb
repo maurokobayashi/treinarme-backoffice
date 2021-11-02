@@ -1,5 +1,13 @@
 class TreinarmeController < ApplicationController
 
+
+  # PATCH /manual_lead_priority
+  def manual_lead_priority
+    Personal.anuncio_ativo.each {|p| p.configurar_prioridade_na_busca!}
+
+    redirect_back(fallback_location: root_path)
+  end
+
   # GET @ /leads?q=?&status=?&limit=?
   def leads
     @totais_hoje = { unicos: Lead.where(created_at: Date.today.all_day).distinct.count(:phone), totais: Lead.where(created_at: Date.today.all_day).count }

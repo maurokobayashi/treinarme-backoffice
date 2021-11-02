@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/cancelamentos', to: 'treinarme#cancelamentos'
   get '/cancelamentos/:id', to: 'treinarme#cancelamento', as: "cancelamento"
 
+  patch '/personals/manual_lead_priority', to: 'treinarme#manual_lead_priority', as: "manual_lead_priority"
+
 
   # charts
   get 'charts/bairros_mais_buscados', to: 'charts#bairros_mais_buscados', as: "bairros_mais_buscados"

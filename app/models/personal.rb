@@ -51,9 +51,34 @@ class Personal < ActiveRecord::Base
   scope :inactive, -> { where(status: Personal.statuses[:inactive]) }
   scope :removed, -> { where(status: Personal.statuses[:removed]) }
 
+  scope :anuncio_ativo, -> { where(status: [1, 0]) }
 
   def avaliacoes
     Review.joins(:lead).approved.where("leads.personal_id = ?", self.id).order(id: :desc)
+  end
+
+  def configurar_prioridade_na_busca!
+    data_ultimo_lead = nil
+
+    # garantir pelo menos 4 leads para cada trial
+    if self.trial? && self.leads.count <= 4
+      data_ultimo_lead = DateTime.now - 1.year
+
+    # não priorizar os churns
+    solicitou_cancelamento = SubscriptionEvent.cancelation.where("personal_id = ? AND created_at >= ?", self.id, DateTime.now - 30).exists?
+    elsif solicitou_cancelamento
+      data_ultimo_lead = DateTime.now
+
+    elsif self.leads.exists?
+      data_ultimo_lead = self.leads.last.created_at.to_date
+
+    else
+      data_ultimo_lead = self.created_at.to_date
+
+    end
+
+    self.lead_control_manual_priority_since = data_ultimo_lead
+    self.save(touch: false)
   end
 
 end
