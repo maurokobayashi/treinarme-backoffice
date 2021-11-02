@@ -61,8 +61,8 @@ class Personal < ActiveRecord::Base
     data_ultimo_lead = nil
 
     # garantir pelo menos 4 leads para cada trial
-    if self.trial? && self.leads.count <= 4
-      data_ultimo_lead = DateTime.now - 1.year
+    if self.trial? && self.leads.count < 4
+      data_ultimo_lead = DateTime.now - 1.month
 
     # não priorizar os churns
     solicitou_cancelamento = SubscriptionEvent.cancelation.where("personal_id = ? AND created_at >= ?", self.id, DateTime.now - 30).exists?
